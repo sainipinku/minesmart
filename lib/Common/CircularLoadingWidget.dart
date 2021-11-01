@@ -51,7 +51,7 @@ class _CircularLoadingWidgetState extends State<CircularLoadingWidget> with Sing
       child: SizedBox(
         height: animation.value,
         child: new Center(
-          child: new CircularProgressIndicator(valueColor:AlwaysStoppedAnimation<Color>(CentralizeColor.coloryellow)),
+          child: new CircularProgressIndicator(valueColor:AlwaysStoppedAnimation<Color>(CentralizeColor.colorlogodark)),
         ),
       ),
     );

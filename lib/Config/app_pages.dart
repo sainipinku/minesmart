@@ -5,6 +5,7 @@ import 'package:minesmart/screens/deshboard.dart';
 import 'package:minesmart/screens/details.dart';
 import 'package:minesmart/screens/erawana.dart';
 import 'package:minesmart/screens/login.dart';
+import 'package:minesmart/screens/profileupdate.dart';
 import 'package:minesmart/screens/splash.dart';
 
 class AppPages {
@@ -25,5 +26,8 @@ class AppPages {
     GetPage(
         name: Routes.details,
         page: () => Details()),
+    GetPage(
+        name: Routes.profileupdate,
+        page: () => ProfileUpdate()),
   ];
 }

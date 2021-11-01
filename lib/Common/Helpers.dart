@@ -52,7 +52,7 @@ class Helpers {
         top: 0,
         left: 0,
         child: Material(
-          color:  CentralizeColor.colorYellow.withOpacity(0.0),
+          color:  CentralizeColor.colorlogodark.withOpacity(0.0),
           child: CircularLoadingWidget(height: 200),
         ),
       );

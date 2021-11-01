@@ -7,6 +7,7 @@ import 'package:minesmart/Helper/fonts.dart';
 import 'package:minesmart/Helper/strings.dart';
 import 'package:minesmart/screens/deshboard.dart';
 import 'package:minesmart/screens/erawana.dart';
+import 'package:minesmart/screens/profileupdate.dart';
 
 class DrawerWidget extends StatefulWidget {
 
@@ -184,10 +185,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   setState(() {
 
                     Navigator.pop(context);
-                   /* Navigator.push(
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MyOrder()),
-                    );*/
+                      MaterialPageRoute(builder: (context) => ProfileUpdate()),
+                    );
                   });
 
                 },
