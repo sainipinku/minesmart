@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:minesmart/Common/Helpers.dart';
+import 'package:minesmart/Common/SharedPref.dart';
 import 'package:minesmart/Helper/colors.dart';
 import 'package:minesmart/Helper/fonts.dart';
 import 'package:minesmart/Helper/strings.dart';
 import 'package:minesmart/elements/DrawerWidget.dart';
+import 'package:minesmart/elements/NoInternetdilogbox.dart';
+import 'package:minesmart/model/RawannaData.dart';
+import 'package:minesmart/repository/rawanna_repository.dart';
 import 'package:minesmart/screens/details.dart';
 
 class Erawana extends StatefulWidget {
@@ -13,6 +18,36 @@ class Erawana extends StatefulWidget {
 }
 
 class _ErawanaState extends State<Erawana> {
+  RawannaData? rawannaData;
+  String sso_id = "";
+  String weight_no = "";
+  @override
+  void initState() {
+    super.initState();
+    SharedPref.getSsoId("sso_id").then((value) => setState(() {
+      sso_id = value;
+    }));
+    SharedPref.getWeighBridgeNo("weigh_bridge_no").then((value) => setState(() {
+      weight_no = value;
+    }));
+    Helpers.verifyInternet().then((intenet) {
+      if (intenet != null && intenet) {
+        getRawannaData(context,sso_id,weight_no).then((response) {
+          setState(() {
+            rawannaData = response;
+          });
+
+        });
+      }
+      else {
+        showDialog(
+          barrierDismissible: true,
+          context: context,
+          builder: (_) => NoInternetdilogbox(),
+        );
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +70,7 @@ class _ErawanaState extends State<Erawana> {
       ),
       drawer: const DrawerWidget(),
       body: SafeArea(
-        child: Column(
+        child:rawannaData !=null ? Column(
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -103,8 +138,8 @@ class _ErawanaState extends State<Erawana> {
             Expanded(child: Container(
               child: Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0,bottom: 10.0),
-                child: ListView.builder(
-                    itemCount: 10,
+                child:  ListView.builder(
+                    itemCount: rawannaData!.data.length,
                     shrinkWrap: true,
                     primary: false,
                     itemBuilder: (BuildContext context, int index) {
@@ -127,14 +162,32 @@ class _ErawanaState extends State<Erawana> {
                                       Expanded(child: Container(
                                         height: 30,
                                         alignment: Alignment.center,
-                                        child: const Text(
-                                          "Detal1",
-                                          style: TextStyle(
-                                            color: CentralizeColor.colorBlack,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily:Fonts.ps_default_font_family,
-                                          ),
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child:Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              Strings.mineralname,
+                                              style: const TextStyle(
+                                                color: CentralizeColor.colorBlack,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily:Fonts.ps_default_font_family,
+                                              ),
+                                            ),
+                                            Padding(padding: EdgeInsets.only(left: 5.0),
+                                            child: Text(
+                                              '${rawannaData!.data[index].mineralName}',
+                                              style: const TextStyle(
+                                                color: CentralizeColor.colorBlack,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily:Fonts.ps_default_font_family,
+                                              ),
+                                            ),)
+
+                                          ],
                                         ),
                                       ),
 
@@ -142,14 +195,32 @@ class _ErawanaState extends State<Erawana> {
                                       Expanded(child: Container(
                                         height: 30,
                                         alignment: Alignment.center,
-                                        child: const Text(
-                                          "Detal2",
-                                          style: TextStyle(
-                                            color: CentralizeColor.colorBlack,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily:Fonts.ps_default_font_family,
-                                          ),
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child:Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              Strings.vechicle,
+                                              style: const TextStyle(
+                                                color: CentralizeColor.colorBlack,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily:Fonts.ps_default_font_family,
+                                              ),
+                                            ),
+                                            Padding(padding: EdgeInsets.only(left: 5.0),
+                                            child: Text(
+                                              '${rawannaData!.data[index].vechicle}',
+                                              style: const TextStyle(
+                                                color: CentralizeColor.colorBlack,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily:Fonts.ps_default_font_family,
+                                              ),
+                                            ),)
+
+                                          ],
                                         ),
                                       )),
                                     ],
@@ -165,29 +236,35 @@ class _ErawanaState extends State<Erawana> {
                                       Expanded(child: Container(
                                         height: 30,
                                         alignment: Alignment.center,
-                                        child: const Text(
-                                          "Detal3",
-                                          style: TextStyle(
-                                            color: CentralizeColor.colorBlack,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily:Fonts.ps_default_font_family,
-                                          ),
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child:Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              Strings.consigneename,
+                                              style: const TextStyle(
+                                                color: CentralizeColor.colorBlack,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily:Fonts.ps_default_font_family,
+                                              ),
+                                            ),
+                                            Padding(padding: EdgeInsets.only(left: 5.0),
+                                              child: Text(
+                                                '${rawannaData!.data[index].consigneeName}',
+                                                style: const TextStyle(
+                                                  color: CentralizeColor.colorBlack,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontFamily:Fonts.ps_default_font_family,
+                                                ),
+                                              ),)
+
+                                          ],
                                         ),
                                       )),
-                                      Expanded(child: Container(
-                                        height: 30,
-                                        alignment: Alignment.center,
-                                        child: const Text(
-                                          "Detal4",
-                                          style: TextStyle(
-                                            color: CentralizeColor.colorBlack,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily:Fonts.ps_default_font_family,
-                                          ),
-                                        ),
-                                      )),
+
                                     ],
                                   ),
                                   const Divider(
@@ -201,29 +278,35 @@ class _ErawanaState extends State<Erawana> {
                                       Expanded(child: Container(
                                         height: 30,
                                         alignment: Alignment.center,
-                                        child: const Text(
-                                          "Detal5",
-                                          style: TextStyle(
-                                            color: CentralizeColor.colorBlack,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily:Fonts.ps_default_font_family,
-                                          ),
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child:Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              Strings.vechicleregistration,
+                                              style: const TextStyle(
+                                                color: CentralizeColor.colorBlack,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily:Fonts.ps_default_font_family,
+                                              ),
+                                            ),
+                                            Padding(padding: EdgeInsets.only(left: 5.0),
+                                              child: Text(
+                                                '${rawannaData!.data[index].vechicleRegistration}',
+                                                style: const TextStyle(
+                                                  color: CentralizeColor.colorBlack,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontFamily:Fonts.ps_default_font_family,
+                                                ),
+                                              ),)
+
+                                          ],
                                         ),
                                       )),
-                                      Expanded(child: Container(
-                                        height: 30,
-                                        alignment: Alignment.center,
-                                        child: const Text(
-                                          "Detal6",
-                                          style: TextStyle(
-                                            color: CentralizeColor.colorBlack,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily:Fonts.ps_default_font_family,
-                                          ),
-                                        ),
-                                      )),
+
                                     ],
                                   ),
                                 ],
@@ -241,7 +324,7 @@ class _ErawanaState extends State<Erawana> {
 
 
           ],
-        ),
+        ): SizedBox(),
       )
       ,
     );

@@ -15,4 +15,15 @@ class Strings {
   static String excel = "Excel";
   static String signinwithgoogle = "Sign in with Google";
   static String leave = "Tap back again to leave";
+  static String company = "Company :";
+  static String address = "Address :";
+  static String mobileno = "MobileNo :";
+  static String emailid = "EmailId :";
+  static String gstno = "GstNo :";
+  static String panno = "PanNo :";
+  static String website = "Website :";
+  static String mineralname = "MineralName :";
+  static String consigneename = "ConsigneeName :";
+  static String vechicle = "Vechicle :";
+  static String vechicleregistration = "VechicleRegistration :";
 }

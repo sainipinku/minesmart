@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:minesmart/Common/SharedPref.dart';
 import 'package:minesmart/Helper/colors.dart';
+import 'package:minesmart/screens/deshboard.dart';
 import 'package:minesmart/screens/login.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
 
@@ -14,14 +16,24 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   late Timer timer;
   Future checkFirstSeen() async {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const Login()));
+   /* Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const Login()));*/
    // SharedPreferences prefs = await SharedPreferences.getInstance();
    // bool _seen = (prefs.getBool('seen') ?? false);
     /* SharedPreferences prefs1 = await SharedPreferences.getInstance();
     String id=prefs1.getString('id')??'';
     String name=prefs1.getString('name')??'';
     print(name);*/
+    SharedPreferences prefs1 = await SharedPreferences.getInstance();
+    String id=prefs1.getString('id')??'';
+     if(id==null||id==''){
+       Navigator.of(context).pushReplacement(
+           new MaterialPageRoute(builder: (context) => new Login()));
+     }
+     else{
+    Navigator.of(context).pushReplacement(
+        new MaterialPageRoute(builder: (context) => new DeshBoard()));
+     }
 
     /*if (_seen) {
       // if(id==null||id==''){

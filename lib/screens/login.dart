@@ -178,10 +178,8 @@ class _LoginState extends State<Login> {
 
                             }
                             else{
-                              //repository.createLogin(emailControl.text, pwControl.text,context);
+                              repository.createLogin(emailControl.text, pwControl.text,context);
 
-                               Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => const DeshBoard()));
                             }
 
                           }

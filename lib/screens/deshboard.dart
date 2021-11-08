@@ -68,14 +68,14 @@ class _DeshBoardState extends State<DeshBoard> {
           builder: (context) => // Ensure Scaffold is in context
           // ignore: deprecated_member_use
           FlatButton(
-              padding: EdgeInsets.all(0.0),
+              padding: const EdgeInsets.all(0.0),
               child: const Icon(
                 Icons.menu,
                 color: Colors.white,
               ),
               onPressed: () => Scaffold.of(context).openDrawer()),
         ),
-        actions: [
+        actions: const [
 
         ],
       ),
@@ -142,7 +142,7 @@ class _DeshBoardState extends State<DeshBoard> {
                         width: MediaQuery.of(context).size.width, fit: BoxFit.fill,),
                 ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 PieChart(
@@ -172,7 +172,7 @@ class _DeshBoardState extends State<DeshBoard> {
                     decimalPlaces: 1,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 /*Container(
@@ -231,9 +231,9 @@ class _DeshBoardState extends State<DeshBoard> {
                         filled: true,
                         fillColor: CentralizeColor.colorlogodark,
                         // labelText: "First name",
-                        labelStyle: TextStyle(color:  Colors.white),
+                        labelStyle: const TextStyle(color:  Colors.white),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderRadius: const BorderRadius.all(Radius.circular(5)),
                           borderSide: BorderSide(color: Colors.white30.withOpacity(0.5)),
 
                         ),
@@ -287,7 +287,7 @@ class _DeshBoardState extends State<DeshBoard> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+                        Padding(padding: const EdgeInsets.only(top: 10.0,bottom: 10.0),
                         child: Text(
                           Strings.erawana,
                           style: const TextStyle(
@@ -327,7 +327,7 @@ class _DeshBoardState extends State<DeshBoard> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+                        Padding(padding: const EdgeInsets.only(top: 10.0,bottom: 10.0),
                           child: Text(
                             Strings.tpass,
                             style: const TextStyle(
@@ -384,7 +384,7 @@ class _DeshBoardState extends State<DeshBoard> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+                        Padding(padding: const EdgeInsets.only(top: 10.0,bottom: 10.0),
                           child: Text(
                             Strings.weightslip,
                             style: const TextStyle(
@@ -406,9 +406,9 @@ class _DeshBoardState extends State<DeshBoard> {
                               color: CentralizeColor.colorlogodark,
                               shape: BoxShape.circle,
                             ),*/
-                            child: Text(
+                            child: const Text(
                               "2000",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: CentralizeColor.colorBlack,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,

@@ -1,6 +1,5 @@
 class Constants {
-  static final String baseUrl = "https://richkart.com/api/";
-  static final String login = "my-order";
-  static final String wishlist = "wishlist";
-
+  static final String baseUrl = "https://dmg.samcontech.com/api/MobileAPI/";
+  static final String login = "getLogin?";
+  static final String getrawanna = "getrawanna?";
 }

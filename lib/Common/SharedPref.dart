@@ -2,98 +2,42 @@
 import 'package:shared_preferences/shared_preferences.dart';
 class SharedPref {
 
- static setId(int id) async {
+ static setUserId(int id) async {
    SharedPreferences prefs = await SharedPreferences.getInstance();
    prefs.setInt('user_id', id);
  }
 
- static setName(String name) async {
+ static setSsoId(String ssoid) async {
    SharedPreferences prefs = await SharedPreferences.getInstance();
-   prefs.setString('user_name', name);
+   prefs.setString('sso_id', ssoid);
  }
 
- static setLastName(String lastname) async {
+ static setWeighBridgeNo(String weighbridgeno) async {
    SharedPreferences prefs = await SharedPreferences.getInstance();
-   prefs.setString('user_last_name', lastname);
+   prefs.setString('weigh_bridge_no', weighbridgeno);
  }
 
- static setEmail(String email) async {
-   SharedPreferences prefs = await SharedPreferences.getInstance();
-   prefs.setString('user_email', email);
- }
-
- static setPhone(int phone) async {
-   SharedPreferences prefs = await SharedPreferences.getInstance();
-   prefs.setInt('user_phone', phone);
- }
-
- static setProfilePic(String profilepic) async {
-   SharedPreferences prefs = await SharedPreferences.getInstance();
-   prefs.setString('user_profile', profilepic);
-   print('user_profile1$profilepic');
- }
-
- static setCountry(bool country) async {
-   SharedPreferences prefs = await SharedPreferences.getInstance();
-   prefs.setBool('user_country', country);
- }
-
- static setListData(List<String> value) async {
-   SharedPreferences prefs = await SharedPreferences.getInstance();
-   prefs.setStringList('search_data', value);
- }
-
- static Future<int> getId(String key) async {
+ static Future<int> getUserId(String key) async {
    SharedPreferences prefs = await SharedPreferences.getInstance();
    return prefs.getInt(key) ?? 0;
 
  }
 
- static Future<String> getName(String key) async {
+ static Future<String> getSsoId(String key) async {
    SharedPreferences prefs = await SharedPreferences.getInstance();
    return prefs.getString(key) ?? " ";
  }
 
- static Future<String> getLastName(String key) async {
+ static Future<String> getWeighBridgeNo(String key) async {
    SharedPreferences prefs = await SharedPreferences.getInstance();
    return prefs.getString(key) ?? "";
 
  }
 
- static Future<String> getEmail(String key) async {
-   SharedPreferences prefs = await SharedPreferences.getInstance();
-   return prefs.getString(key) ?? "";
-
- }
-
- static Future<int> getPhone(String key) async {
-   SharedPreferences prefs = await SharedPreferences.getInstance();
-   return prefs.getInt(key) ?? 0;
-
- }
-
- static Future<String> getProfilePic(String key) async {
-   SharedPreferences prefs = await SharedPreferences.getInstance();
-   if(prefs.getString('user_profile') !=null){
-     return prefs.getString(key) ?? " ";
-   }else{
-     return "assets/images/richkart.png";
-   }
-
- }
- static Future<bool> getCountry(String key) async {
-   SharedPreferences prefs = await SharedPreferences.getInstance();
-   return prefs.getBool(key) ?? false;
-
- }
- static Future<List<String>?> getListData(String key) async {
-   SharedPreferences prefs = await SharedPreferences.getInstance();
-   return prefs.getStringList(key);
- }
 
  static removeValues() async {
    SharedPreferences prefs = await SharedPreferences.getInstance();
-   prefs.remove("id");
+   prefs.remove("user_id");
 
  }
  static removeAll() async{

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:minesmart/Common/Helpers.dart';
@@ -6,6 +7,8 @@ import 'package:minesmart/Common/SharedPref.dart';
 import 'package:minesmart/Helper/constants.dart';
 import 'package:minesmart/model/UserData.dart';
 import 'package:http/http.dart' as http;
+import 'package:minesmart/screens/deshboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 ValueNotifier<UserData> usergetDatas = ValueNotifier(UserData());
 
 Future<UserData> createLogin(
@@ -13,41 +16,53 @@ Future<UserData> createLogin(
 {
   OverlayEntry loader = Helpers.overlayLoader(context);
   Overlay.of(context)!.insert(loader);
-  var url = Uri.parse(Constants.baseUrl+ Constants.login);
-  var map = new Map<String, dynamic>();
-  map['email'] = email;
-  map['password'] = password;
-  map['device_token'] = '';
-  http.Response response = await http.post(
+  String Url = Constants.baseUrl+ Constants.login;
+  var url;
+    url = Uri.parse(Constants.baseUrl+ Constants.login+'objAuthoken=987654321&objUserName='+email+'&objPassword='+password+'');
+  final http.Response response = await http.post(
     url,
-    //headers: {'Authorization':Helpers.authId},
-    body: map,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+   /* body: jsonEncode(<String, String>{
+      'objAuthoken': '987654321',
+      'objUserName': email,
+      'objPassword': password,
+    }
+    ),*/
   );
-
+/*  var queryParameters = {
+    'objAuthoken': '987654321',
+    'objUserName': email,
+    'objPassword': password,
+  };
+  var uri =
+  Uri.https(Constants.baseUrl, Constants.login, queryParameters);
+  var response = await http.post(uri, headers: {
+    HttpHeaders.contentTypeHeader: 'application/json',
+  });*/
+/*  var map = new Map<String, dynamic>();
+  map['objUserName'] = email;
+  map['objPassword'] = password;
+  map['objAuthoken'] = '987654321';
+  final client = new http.Client();
+  final response = await client.post(
+    Url,
+    headers: {HttpHeaders.contentTypeHeader: 'application/json',},
+    body: map,
+  );*/
   if (response.statusCode == 200) {
     Helpers.hideLoader(loader);
-    int status;
-    status=json.decode(response.body)['status'];
-    if(status==1){
-      Helpers.createSnackBar(context, json.decode(response.body)['message'].toString());
-      usergetDatas.value = UserData.fromJSON(json.decode(response.body)['data']);
-      SharedPref.setId(jsonDecode(response.body)['data']["id"]);
-      SharedPref.setName(jsonDecode(response.body)['data']["name"]);
-      SharedPref.setLastName(jsonDecode(response.body)['data']["lastname"]);
-      SharedPref.setEmail(jsonDecode(response.body)['data']["email"]);
-      SharedPref.setPhone(jsonDecode(response.body)['data']["mobileno"]);
-      SharedPref.setProfilePic(jsonDecode(response.body)['data']["profilepic"]);
-     /* Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => Home()
-        ),
-      );*/
-      return usergetDatas.value;
-    }
-    else{
-      Helpers.createSnackBar(context, json.decode(response.body)['message'].toString());
-    }
+    Helpers.createSnackBar(context, json.decode(response.body)['message'].toString());
+    usergetDatas.value = UserData.fromJson(json.decode(response.body));
+    SharedPref.setUserId(usergetDatas.value.data[0].userId);
+    SharedPref.setSsoId(usergetDatas.value.data[0].ssoId);
+    SharedPref.setWeighBridgeNo(usergetDatas.value.data[0].weighBridgeNo);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('id', usergetDatas.value.data[0].userId.toString());
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => DeshBoard()));
+    return usergetDatas.value;
 
   } else {
     Helpers.hideLoader(loader);
@@ -55,5 +70,5 @@ Future<UserData> createLogin(
     throw new Exception(response.body);
 
   }
-  return usergetDatas.value;
+
 }

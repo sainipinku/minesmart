@@ -318,7 +318,6 @@ class LogoutState extends State<Logout>
                           SharedPref.removeValues();
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-
                                 duration: const Duration(seconds: 1),
                                 backgroundColor:  CentralizeColor.colorGreen,
                                 content: Text('Logout Successfully',

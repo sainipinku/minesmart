@@ -83,148 +83,210 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
               ],
             ),
             Container(
-              margin: const EdgeInsets.only(left: 10.0,right: 10.0,top: 100.0),
+              margin: const EdgeInsets.only(left: 20.0,right: 20.0,top: 20.0),
+
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextFormField(
-                    style: const TextStyle(
-                        color: Colors.black
-                    ),
-                    controller: emailControl,
-                    keyboardType: TextInputType.emailAddress,
-                    //onSaved: (input) => _con!.user.email = input!,
-                    //validator: (input) => !input!.contains('@') ? "Should be a valid email" : null,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      labelText: "Email Id",
-                      labelStyle: const TextStyle(color:  Colors.black),
-                      contentPadding: const EdgeInsets.all(20),
-                      hintText: 'Email Id',
-                      hintStyle: TextStyle(color:Colors.black),
-                      //  border: OutlineInputBorder(borderSide: BorderSide(color:UiWhiteColor.withOpacity(0.2))),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(const Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.grey.withOpacity(0.5)),
-
-                      ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                      border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey),
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  TextFormField(
-                    style: const TextStyle(
-                        color: Colors.black
-                    ),
-                    keyboardType: TextInputType.text,
-                    controller: pwControl,
-                    //onSaved: (input) => _con!.user.password = input!,
-                    //validator: (input) => input!.length < 3 ? "Should be more than 3 characters" : null,
-                    obscureText: hidePassword,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      labelText: "Password",
-                      labelStyle: const TextStyle(color:  Colors.black),
-                      contentPadding: const EdgeInsets.all(20),
-                      hintText: 'Password',
-                      hintStyle: const TextStyle(color:Colors.black),
-                      //    prefixIcon: Icon(Icons.lock_outline, color: Theme.of(context).accentColor),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            hidePassword =!hidePassword;
-                          });
-                        },
-                        color: Colors.black,
-                        icon: Icon(hidePassword ? Icons.visibility : Icons.visibility_off),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.grey.withOpacity(0.5)),
-
-                      ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                      border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey),
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                    ),
-
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: CentralizeColor.colorlogodark,
-                        onPrimary:
-                        Colors.white, // foreground
-                      ),
-                      onPressed: () {
-
-                        Helpers.verifyInternet().then((intenet) {
-                          if (intenet != null && intenet) {
-
-                            if(emailControl.text.isEmpty){
-                              Helpers.createSnackBar(context, "Should be a fill Email");
-
-                            }
-                            else if(!Helpers.validateEmail(emailControl.text)){
-                              Helpers.createSnackBar(context, "Should be a valid email");
-                            }
-
-                            else if(pwControl.text.isEmpty) {
-                              Helpers.createSnackBar(context, "Should be a fill Password");
-
-                            }
-                            else{
-                              //repository.createLogin(emailControl.text, pwControl.text,context);
-/*
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (context) => const DeshBoard()));*/
-                            }
-
-                          }
-                          else {
-                            showDialog(
-                              barrierDismissible: true,
-                              context: context,
-                              builder: (_) => NoInternetdilogbox(),
-                            );
-                          }
-
-                        });
-
-                      },
-                      child: Text(
-                        Strings.login,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:  [
+                      Text(Strings.company,
                         style: const TextStyle(
-                          color: CentralizeColor.colorWhite,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          fontFamily:Fonts.ps_default_font_family,
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontFamily: Fonts.ps_default_font_family,
+                            fontWeight: FontWeight.w600
                         ),
                       ),
-                    ),
-                  )
+                      Expanded(child: Padding(padding: const EdgeInsets.only(left: 10.0),
+                        child: Text(Strings.signinwithgoogle,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontFamily: Fonts.ps_default_font_family,
+                              fontWeight: FontWeight.w600
+                          ),
+                        ),))
+
+
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:  [
+                      Text(Strings.address,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontFamily: Fonts.ps_default_font_family,
+                            fontWeight: FontWeight.w600
+                        ),
+                      ),
+                      const Expanded(child: Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Text(" A 163 Shiv nagar murlipura scheme jaipur 302013 ",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontFamily: Fonts.ps_default_font_family,
+                              fontWeight: FontWeight.w600
+                          ),
+                        ),))
+
+
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:  [
+                      Text(Strings.mobileno,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontFamily: Fonts.ps_default_font_family,
+                            fontWeight: FontWeight.w600
+                        ),
+                      ),
+                      Padding(padding: const EdgeInsets.only(left: 10.0),
+                        child: Text(Strings.signinwithgoogle,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontFamily: Fonts.ps_default_font_family,
+                              fontWeight: FontWeight.w600
+                          ),
+                        ),)
+
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:  [
+                      Text(Strings.emailid,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontFamily: Fonts.ps_default_font_family,
+                            fontWeight: FontWeight.w600
+                        ),
+                      ),
+                      Padding(padding: const EdgeInsets.only(left: 10.0),
+                        child: Text(Strings.signinwithgoogle,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontFamily: Fonts.ps_default_font_family,
+                              fontWeight: FontWeight.w600
+                          ),
+                        ),)
+
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:  [
+                      Text(Strings.gstno,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontFamily: Fonts.ps_default_font_family,
+                            fontWeight: FontWeight.w600
+                        ),
+                      ),
+                      Padding(padding: const EdgeInsets.only(left: 10.0),
+                        child: Text(Strings.signinwithgoogle,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontFamily: Fonts.ps_default_font_family,
+                              fontWeight: FontWeight.w600
+                          ),
+                        ),)
+
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:  [
+                      Text(Strings.panno,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontFamily: Fonts.ps_default_font_family,
+                            fontWeight: FontWeight.w600
+                        ),
+                      ),
+                      Padding(padding: const EdgeInsets.only(left: 10.0),
+                        child: Text(Strings.signinwithgoogle,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontFamily: Fonts.ps_default_font_family,
+                              fontWeight: FontWeight.w600
+                          ),
+                        ),)
+
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:  [
+                      Text(Strings.website,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontFamily: Fonts.ps_default_font_family,
+                            fontWeight: FontWeight.w600
+                        ),
+                      ),
+                      Padding(padding: const EdgeInsets.only(left: 10.0),
+                        child: Text(Strings.signinwithgoogle,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontFamily: Fonts.ps_default_font_family,
+                              fontWeight: FontWeight.w600
+                          ),
+                        ),)
+
+                    ],
+                  ),
+
+
                 ],
-              ),
+              )
+              ,
             )
             ,
           ],
