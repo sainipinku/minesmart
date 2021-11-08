@@ -104,6 +104,7 @@ class Helpers {
       return '';
     }
   }
+
   static createSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       duration: const Duration(seconds: 1),

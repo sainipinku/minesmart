@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:minesmart/Common/Helpers.dart';
 import 'package:minesmart/Common/SharedPref.dart';
 import 'package:minesmart/Helper/colors.dart';
 import 'package:minesmart/Helper/fonts.dart';
 import 'package:minesmart/Helper/strings.dart';
 import 'package:minesmart/screens/deshboard.dart';
 import 'package:minesmart/screens/erawana.dart';
+import 'package:minesmart/screens/login.dart';
 import 'package:minesmart/screens/profileupdate.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -280,64 +282,87 @@ class LogoutState extends State<Logout>
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0))),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: 20,),
+                  SizedBox(height: 5,),
                   Padding(padding: EdgeInsets.only(left: 10.0,right: 10.0),
                     child: Text("Do you want to exit this application?"
                       ,style: TextStyle(
                           color: Colors.black,
-                          fontSize: 15,
+                          fontSize: 18,
                         fontFamily:Fonts.ps_default_font_family,
                         fontWeight: FontWeight.w600,
                       ),),),
                   SizedBox(height: 20,),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      InkWell(
-                        onTap: (){
-                          Navigator.of(context, rootNavigator: true)
-                              .pop(false);
-                        },
-                        child: Text("No",
-                          style: TextStyle(
-                              color: CentralizeColor.colorsdrakgray,
+                      Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.30,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: CentralizeColor.colorgray,
+                            onPrimary:
+                            Colors.white, // foreground
+                          ),
+                          onPressed: () {
+                            Navigator.of(context, rootNavigator: true)
+                                .pop(false);
+                          },
+                          child: Text(
+                            Strings.cancel,
+                            style: const TextStyle(
+                              color: CentralizeColor.colorWhite,
                               fontSize: 15,
+                              fontWeight: FontWeight.w600,
                               fontFamily:Fonts.ps_default_font_family,
-                              fontWeight: FontWeight.w600
-                          )
-                          ,),
+                            ),
+                          ),
+                        ),
                       ),
-                      SizedBox(width: 20,),
-                      InkWell(
+                      Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.30,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: CentralizeColor.colorlogodark,
+                            onPrimary:
+                            Colors.white, // foreground
+                          ),
+                          onPressed: () {
+                            SharedPref.removeAll();
+                            SharedPref.removeValues();
+                            Helpers.createSnackBar(context, 'Logout Successfully');
+                            Navigator.pop(context);
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => Login()),
+                            );
+                          },
+                          child: Text(
+                            Strings.logout,
+                            style: const TextStyle(
+                              color: CentralizeColor.colorWhite,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              fontFamily:Fonts.ps_default_font_family,
+                            ),
+                          ),
+                        ),
+                      )
+                     /* InkWell(
                         onTap: (){
                           SharedPref.removeAll();
                           SharedPref.removeValues();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: const Duration(seconds: 1),
-                                backgroundColor:  CentralizeColor.colorGreen,
-                                content: Text('Logout Successfully',
-                                  style: TextStyle(
-                                      fontSize: 14.0,
-                                      fontFamily: Fonts
-                                          .ps_default_font_family,
-                                      fontWeight: FontWeight.w600,
-                                      color:CentralizeColor.colorWhite
-                                  ),
-
-                                ),
-
-                              )
-                          );
+                          Helpers.createSnackBar(context, 'Logout Successfully');
                           Navigator.pop(context);
-                         /* Navigator.pushReplacement(
+                          Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => Home()),
-                          );*/
+                            MaterialPageRoute(builder: (context) => Login()),
+                          );
 
                         },
                         child: Text("Yes",
@@ -346,7 +371,7 @@ class LogoutState extends State<Logout>
                               fontSize: 15,
                               fontFamily:Fonts.ps_default_font_family,
                               fontWeight: FontWeight.w600
-                          ),),),
+                          ),),),*/
                     ],
                   )
                 ],

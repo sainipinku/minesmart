@@ -25,5 +25,6 @@ class Strings {
   static String mineralname = "MineralName :";
   static String consigneename = "ConsigneeName :";
   static String vechicle = "Vechicle :";
+  static String cancel = "Cancel";
   static String vechicleregistration = "VechicleRegistration :";
 }
