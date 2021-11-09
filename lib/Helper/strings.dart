@@ -23,8 +23,11 @@ class Strings {
   static String panno = "PanNo :";
   static String website = "Website :";
   static String mineralname = "MineralName :";
+  static String drivermobileno = "DriverMobileNo :";
   static String consigneename = "ConsigneeName :";
   static String vechicle = "Vechicle :";
   static String cancel = "Cancel";
+  static String drivername = "DriverName :";
+  static String totalweight = "TotalWeight :";
   static String vechicleregistration = "VechicleRegistration :";
 }
