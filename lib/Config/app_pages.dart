@@ -4,6 +4,7 @@ import 'package:minesmart/Config/app_route.dart';
 import 'package:minesmart/screens/deshboard.dart';
 import 'package:minesmart/screens/details.dart';
 import 'package:minesmart/screens/erawana.dart';
+import 'package:minesmart/screens/erawanafillter.dart';
 import 'package:minesmart/screens/login.dart';
 import 'package:minesmart/screens/profileupdate.dart';
 import 'package:minesmart/screens/splash.dart';
@@ -25,9 +26,12 @@ class AppPages {
         page: () => Erawana()),
     GetPage(
         name: Routes.details,
-        page: () => Details()),
+        page: () => Details(0)),
     GetPage(
         name: Routes.profileupdate,
         page: () => ProfileUpdate()),
+    GetPage(
+        name: Routes.erawanafillter,
+        page: () => ErawanaFillter()),
   ];
 }

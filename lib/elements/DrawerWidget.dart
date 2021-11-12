@@ -204,10 +204,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 onTap: () {
                   setState(() {
                     Navigator.pop(context);
-                   /* Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyAccount()),
-                    );*/
+
                   });
                   /* Navigator.push(
                 context,

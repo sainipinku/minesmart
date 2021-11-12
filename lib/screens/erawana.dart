@@ -9,6 +9,7 @@ import 'package:minesmart/elements/NoInternetdilogbox.dart';
 import 'package:minesmart/model/RawannaData.dart';
 import 'package:minesmart/repository/rawanna_repository.dart';
 import 'package:minesmart/screens/details.dart';
+import 'package:minesmart/screens/erawanafillter.dart';
 
 class Erawana extends StatefulWidget {
   const Erawana({Key? key}) : super(key: key);
@@ -79,7 +80,8 @@ class _ErawanaState extends State<Erawana> {
                 children: [
                   InkWell(
                     onTap: (){
-
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => ErawanaFillter()));
                     },
                     child: Row(
                       children: [
@@ -167,13 +169,12 @@ class _ErawanaState extends State<Erawana> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          child:
-                          Container(
+                          child: Container(
                               padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
                               child: InkWell(
                                 onTap: () {
                                   Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(builder: (context) => const Details()));
+                                      MaterialPageRoute(builder: (context) => Details(index)));
                                 },
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,7 +193,7 @@ class _ErawanaState extends State<Erawana> {
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Text(
-                                                Strings.consigneename,
+                                                Strings.ERawannaNo,
                                                 style: const TextStyle(
                                                   color: CentralizeColor.colorBlack,
                                                   fontSize: 13,
@@ -202,7 +203,7 @@ class _ErawanaState extends State<Erawana> {
                                               ),
                                               Padding(padding: EdgeInsets.only(left: 5.0),
                                                 child: Text(
-                                                  '${rawannaData!.data[index].consigneeName}',
+                                                  '${rawannaData!.data[index].ERawannaNo}',
                                                   style: const TextStyle(
                                                     color: CentralizeColor.colorBlack,
                                                     fontSize: 13,
@@ -434,8 +435,7 @@ class _ErawanaState extends State<Erawana> {
             ),
           ),
         ):const SizedBox(),
-      )
-      ,
+      ),
     );
   }
 }

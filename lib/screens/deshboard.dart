@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:minesmart/Helper/colors.dart';
@@ -5,6 +7,7 @@ import 'package:minesmart/Helper/fonts.dart';
 import 'package:minesmart/Helper/strings.dart';
 import 'package:minesmart/elements/DrawerWidget.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class DeshBoard extends StatefulWidget {
   const DeshBoard({Key? key}) : super(key: key);
 
@@ -16,6 +19,9 @@ class _DeshBoardState extends State<DeshBoard> {
   GlobalKey<ScaffoldState> _globalKey = GlobalKey();
   DateTime currentBackPressTime = DateTime.now();
   Map<String, double> dataMap = Map();
+  int currentIndex = 0;
+  late PageController _controller;
+
  /* Map<String, double> dataMap = {
     "Flutter": 5,
     "React": 3,
@@ -57,9 +63,36 @@ class _DeshBoardState extends State<DeshBoard> {
   void initState() {
     super.initState();
     changeGraph();
+    _controller = PageController(initialPage: 0);
+    Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      if (currentIndex < 2) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+
+      _controller.animateToPage(
+        currentIndex,
+        duration: Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
+    final List<ListData> list = <ListData>[];
+    ListData listData = new ListData("assets/images/mines_img.jpg",);
+    list.add(listData);
+    listData = new ListData("assets/images/minesmart.png",);
+    list.add(listData);
+    listData = new ListData("assets/images/mines_img.jpg",);
+    list.add(listData);
     return Scaffold(
       key: _globalKey,
       appBar: AppBar(
@@ -131,7 +164,78 @@ class _DeshBoardState extends State<DeshBoard> {
                     ),
                   ],
                 ),
-                Container(
+                Stack(children: <Widget>[
+                  Container(
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.25,
+                    child: Container(
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
+                      child: PageView.builder(
+                        controller: _controller,
+                        itemCount: list.length,
+                        itemBuilder: (_, index) {
+                          return Container(
+                            height: MediaQuery
+                                .of(context)
+                                .size
+                                .height * 0.25,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
+                            child: Center(
+                                child: Image.asset(
+                                  list[index].image,
+                                  height: MediaQuery.of(context).size.height * 0.25,
+                                  width: MediaQuery.of(context).size.width, fit: BoxFit.fill,)
+                              /*list.isNotEmpty  ?
+                                FadeInImage(
+                                  image: AssetImage(list[index].image),
+                                  width: MediaQuery.of(context).size.width,
+                                  height: MediaQuery.of(context).size.height * 0.25,
+                                  fit: BoxFit.fill,
+                                  placeholder: AssetImage("assets/images/minesmart.png"),
+                                  imageErrorBuilder: (context, error, stackTrace)
+                                  {
+                                    return Image.asset(
+                                      "assets/images/minesmart.png",
+                                      height: MediaQuery.of(context).size.height * 0.25,
+                                      width: MediaQuery.of(context).size.width, fit: BoxFit.fill,);
+                                  },
+
+                                ) : Image.asset(
+                                  "assets/images/minesmart.png",
+                                  height: MediaQuery.of(context).size.height * 0.25,
+                                  width: MediaQuery.of(context).size.width, fit: BoxFit.fill,)*/),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 180, left: 150),
+                    child: SmoothPageIndicator(
+                        controller: _controller,
+                        count: list.length,
+                        effect: ScrollingDotsEffect(
+                            radius: 8,
+                            spacing: 8,
+                            dotHeight: 8,
+                            dotWidth: 8,
+                            activeDotColor: CentralizeColor.colorsblack
+                        )),
+                  ),
+                ]),
+                /*Container(
                   height: MediaQuery.of(context).size.height * 0.25,
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.only(left: 10.0,right: 10.0),
@@ -141,7 +245,7 @@ class _DeshBoardState extends State<DeshBoard> {
                         height: MediaQuery.of(context).size.height * 0.25,
                         width: MediaQuery.of(context).size.width, fit: BoxFit.fill,),
                 ),
-                ),
+                ),*/
                 const SizedBox(
                   height: 20,
                 ),
@@ -175,46 +279,6 @@ class _DeshBoardState extends State<DeshBoard> {
                 const SizedBox(
                   height: 30,
                 ),
-                /*Container(
-                  height: 50,
-                  padding: const EdgeInsets.only(left: 15.0,right: 15.0,top: 5.0,bottom: 5.0),
-                  margin: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    // color: CentralizeColor.colorgray,
-                    border: Border.all(
-                        width: 0.5, color: CentralizeColor.colorsdrakgray),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      iconEnabledColor: Colors.white,
-                      iconDisabledColor: Colors.white,
-                      value: dropdown,
-                      hint:  const Text("Day"),
-                      isExpanded: true,
-                      //icon: const Visibility (visible:false, child: Icon(Icons.arrow_downward)),
-                      icon: const Icon(Icons.arrow_drop_down),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(
-                          color: CentralizeColor.colorsdrakgray,
-                          fontSize: 15,
-                          fontFamily: Fonts.ps_default_font_family),
-                      onChanged: (String? data) {
-                        setState(() {
-                          dropdown = data!;
-                        });
-                      },
-                      items: Items.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  )
-                  ,
-                ),*/
                 Container(
                   margin: const EdgeInsets.only(left: 10.0,right: 10.0),
                   child:
@@ -461,4 +525,8 @@ class _DeshBoardState extends State<DeshBoard> {
     }
     return Future.value(true);
   }
+}
+class ListData {
+  String image;
+  ListData(this.image);
 }

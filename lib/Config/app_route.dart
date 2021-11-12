@@ -7,6 +7,7 @@ abstract class Routes {
   static const erawana = '/Erawana';
   static const details = '/Details';
   static const profileupdate = '/ProfileUpdate';
+  static const erawanafillter = '/ErawanaFillter';
 
 }
 

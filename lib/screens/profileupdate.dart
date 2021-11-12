@@ -5,6 +5,8 @@ import 'package:minesmart/Helper/fonts.dart';
 import 'package:minesmart/Helper/strings.dart';
 import 'package:minesmart/elements/DrawerWidget.dart';
 import 'package:minesmart/elements/NoInternetdilogbox.dart';
+import 'package:minesmart/model/CompanyProfileModel.dart';
+import 'package:minesmart/repository/company_profile_repository.dart';
 
 class ProfileUpdate extends StatefulWidget {
   const ProfileUpdate({Key? key}) : super(key: key);
@@ -14,10 +16,28 @@ class ProfileUpdate extends StatefulWidget {
 }
 
 class _ProfileUpdateState extends State<ProfileUpdate> {
-  bool hidePassword = true;
+  CompanyProfileModel? companyProfileModel;
+  @override
+  void initState() {
+    super.initState();
+    Helpers.verifyInternet().then((intenet) {
+      if (intenet != null && intenet) {
+        getCompanyDetails(context,).then((response) {
+          setState(() {
+            companyProfileModel = response;
+          });
 
-  final emailControl = TextEditingController();
-  final pwControl = TextEditingController();
+        });
+      }
+      else {
+        showDialog(
+          barrierDismissible: true,
+          context: context,
+          builder: (_) => NoInternetdilogbox(),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +101,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
               ],
             ),
             Container(
-              child: Card(
+              child:companyProfileModel != null ? Card(
                 elevation:5,
                 margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
                 shape: RoundedRectangleBorder(
@@ -107,12 +127,12 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                            ),
                            Expanded(
                                child: Padding(
-                                 padding: const EdgeInsets.only(left: 10.0),
+                                 padding: EdgeInsets.only(left: 10.0),
                                  child: Text(
-                                   "Minesmart",
+                                   '${companyProfileModel!.data[0].cOMPANYNAME}',
                                    maxLines: 2,
                                    overflow: TextOverflow.ellipsis,
-                                   style: const TextStyle(
+                                   style: TextStyle(
                                        color: Colors.black,
                                        fontSize: 17,
                                        fontFamily: Fonts.ps_default_font_family,
@@ -136,11 +156,11 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                  fontFamily: Fonts.ps_default_font_family,
                                  fontWeight: FontWeight.w600),
                            ),
-                           const Expanded(
+                           Expanded(
                                child: Padding(
                                  padding: EdgeInsets.only(left: 10.0),
                                  child: Text(
-                                   " A 163 Shiv nagar murlipura scheme jaipur 302013 ",
+                                   '${companyProfileModel!.data[0].aDDRESS}',
                                    maxLines: 2,
                                    overflow: TextOverflow.ellipsis,
                                    style: TextStyle(
@@ -168,10 +188,10 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                  fontWeight: FontWeight.w600),
                            ),
                            Padding(
-                             padding: const EdgeInsets.only(left: 10.0),
+                             padding: EdgeInsets.only(left: 10.0),
                              child: Text(
-                               "987654321",
-                               style: const TextStyle(
+                               '${companyProfileModel!.data[0].mOBILE}',
+                               style: TextStyle(
                                    color: Colors.black,
                                    fontSize: 17,
                                    fontFamily: Fonts.ps_default_font_family,
@@ -196,10 +216,10 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                  fontWeight: FontWeight.w600),
                            ),
                            Padding(
-                             padding: const EdgeInsets.only(left: 10.0),
+                             padding: EdgeInsets.only(left: 10.0),
                              child: Text(
-                               "abc@gmail.com",
-                               style: const TextStyle(
+                               '${companyProfileModel!.data[0].eMAIL}',
+                               style: TextStyle(
                                    color: Colors.black,
                                    fontSize: 17,
                                    fontFamily: Fonts.ps_default_font_family,
@@ -224,10 +244,10 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                  fontWeight: FontWeight.w600),
                            ),
                            Padding(
-                             padding: const EdgeInsets.only(left: 10.0),
+                             padding: EdgeInsets.only(left: 10.0),
                              child: Text(
-                               "GHFR12456677JHFBHGHNN",
-                               style: const TextStyle(
+                               '${companyProfileModel!.data[0].gSTNO}',
+                               style: TextStyle(
                                    color: Colors.black,
                                    fontSize: 17,
                                    fontFamily: Fonts.ps_default_font_family,
@@ -252,10 +272,10 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                  fontWeight: FontWeight.w600),
                            ),
                            Padding(
-                             padding: const EdgeInsets.only(left: 10.0),
+                             padding: EdgeInsets.only(left: 10.0),
                              child: Text(
-                               "GHFR12456677JHFBHGHNN",
-                               style: const TextStyle(
+                               '${companyProfileModel!.data[0].pANCARD}',
+                               style: TextStyle(
                                    color: Colors.black,
                                    fontSize: 17,
                                    fontFamily: Fonts.ps_default_font_family,
@@ -279,11 +299,11 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                  fontFamily: Fonts.ps_default_font_family,
                                  fontWeight: FontWeight.w600),
                            ),
-                           Padding(
-                             padding: const EdgeInsets.only(left: 10.0),
+                           const Padding(
+                             padding: EdgeInsets.only(left: 10.0),
                              child: Text(
                                "www.minesmart.com",
-                               style: const TextStyle(
+                               style: TextStyle(
                                    color: Colors.black,
                                    fontSize: 17,
                                    fontFamily: Fonts.ps_default_font_family,
@@ -294,6 +314,15 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                        ),
                      ],
                    ),),
+              ):const Center(
+                  child: Text(
+                    "No Record",
+                    style:  TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontFamily: Fonts.ps_default_font_family,
+                        fontWeight: FontWeight.w600),
+                  )
               ),
             ),
           ],

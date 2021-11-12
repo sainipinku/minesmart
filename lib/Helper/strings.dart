@@ -25,9 +25,15 @@ class Strings {
   static String mineralname = "MineralName :";
   static String drivermobileno = "DriverMobileNo :";
   static String consigneename = "ConsigneeName :";
-  static String vechicle = "Vechicle :";
+  static String vechicle = "Vehicle :";
   static String cancel = "Cancel";
+  static String unit = "Unit :";
   static String drivername = "DriverName :";
+  static String tareweight = "TareWeight :";
+  static String grossweight = "GrossWeight :";
+  static String rawannastatus = "Rawannastatus :";
   static String totalweight = "TotalWeight :";
+  static String ERawannaNo = "ERawannaNo :";
   static String vechicleregistration = "VechicleRegistration :";
+  static String applyfilter = "Apply Filter";
 }
