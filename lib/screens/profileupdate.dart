@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minesmart/Common/Helpers.dart';
+import 'package:minesmart/Common/SharedPref.dart';
 import 'package:minesmart/Helper/colors.dart';
 import 'package:minesmart/Helper/fonts.dart';
 import 'package:minesmart/Helper/strings.dart';
@@ -17,12 +18,20 @@ class ProfileUpdate extends StatefulWidget {
 
 class _ProfileUpdateState extends State<ProfileUpdate> {
   CompanyProfileModel? companyProfileModel;
+  String sso_id = "";
+  String user_id = "";
   @override
   void initState() {
     super.initState();
+    SharedPref.getSsoId("sso_id").then((value) => setState(() {
+      sso_id = value;
+    }));
+    SharedPref.getWeighBridgeNo("user_id").then((value) => setState(() {
+      user_id = value;
+    }));
     Helpers.verifyInternet().then((intenet) {
       if (intenet != null && intenet) {
-        getCompanyDetails(context,).then((response) {
+        getCompanyDetails(context,sso_id,user_id).then((response) {
           setState(() {
             companyProfileModel = response;
           });
@@ -108,7 +117,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Padding(padding: EdgeInsets.only(left: 20.0,right: 20.0,top: 20.0,bottom: 20.0),
-                   child:
+                   child:companyProfileModel!.data.isNotEmpty ?
                    Column(
                      crossAxisAlignment: CrossAxisAlignment.center,
                      mainAxisAlignment: MainAxisAlignment.center,
@@ -313,10 +322,19 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                          ],
                        ),
                      ],
+                   ):Center(
+                       child: Text(
+                         "No Record",
+                         style:  TextStyle(
+                             color: Colors.black,
+                             fontSize: 17,
+                             fontFamily: Fonts.ps_default_font_family,
+                             fontWeight: FontWeight.w600),
+                       )
                    ),),
               ):const Center(
                   child: Text(
-                    "No Record",
+                    "",
                     style:  TextStyle(
                         color: Colors.black,
                         fontSize: 17,

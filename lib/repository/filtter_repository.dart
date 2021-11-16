@@ -13,12 +13,12 @@ import 'package:minesmart/screens/deshboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-Future<FiltterModel> getFiltterData(BuildContext context) async
+Future<FiltterModel> getFiltterData(BuildContext context,String ssoid,String weightno) async
 {
   OverlayEntry loader = Helpers.overlayLoader(context);
   Overlay.of(context)!.insert(loader);
   var url;
-  url = Uri.parse(Constants.baseUrl+ Constants.getFillterMaster);
+  url = Uri.parse(Constants.baseUrl+ Constants.getFillterMaster+'objAuthoken=987654321&objssoid='+ssoid+'&objweightno='+weightno+'');
   final http.Response response = await http.post(
     url,
     headers: <String, String>{

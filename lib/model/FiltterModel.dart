@@ -30,6 +30,7 @@ class Data {
   List<Table4> table4= [];
   List<Table5> table5= [];
   List<Table6> table6= [];
+  List<Table7> table7= [];
 
   Data(
       this.table,
@@ -38,7 +39,8 @@ class Data {
         this.table3,
         this.table4,
         this.table5,
-        this.table6);
+        this.table6,
+      this.table7);
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['Table'] != null) {
@@ -83,6 +85,12 @@ class Data {
         table6.add(new Table6.fromJson(v));
       });
     }
+    if (json['Table7'] != null) {
+      table7 = <Table7>[];
+      json['Table7'].forEach((v) {
+        table7.add(new Table7.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -107,6 +115,9 @@ class Data {
     }
     if (this.table6 != null) {
       data['Table6'] = this.table6.map((v) => v.toJson()).toList();
+    }
+    if (this.table7 != null) {
+      data['Table7'] = this.table7.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -209,11 +220,26 @@ class Table5 {
 }
 
 class Table6 {
-  String rAWANNASTATUS ="";
+  String MLNo ="";
 
-  Table6(this.rAWANNASTATUS);
+  Table6(this.MLNo);
 
   Table6.fromJson(Map<String, dynamic> json) {
+    MLNo = json['MLNo'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['MLNo'] = this.MLNo;
+    return data;
+  }
+}
+class Table7 {
+  String rAWANNASTATUS ="";
+
+  Table7(this.rAWANNASTATUS);
+
+  Table7.fromJson(Map<String, dynamic> json) {
     rAWANNASTATUS = json['RAWANNASTATUS'];
   }
 

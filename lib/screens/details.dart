@@ -8,6 +8,7 @@ import 'package:minesmart/elements/DrawerWidget.dart';
 import 'package:minesmart/elements/NoInternetdilogbox.dart';
 import 'package:minesmart/model/RawannaData.dart';
 import 'package:minesmart/repository/rawanna_repository.dart';
+import 'package:minesmart/screens/erawana.dart';
 class Details extends StatefulWidget {
   int index;
   Details(int this.index) : super();
@@ -61,10 +62,13 @@ class _DetailsState extends State<Details> {
           FlatButton(
               padding: EdgeInsets.all(0.0),
               child: const Icon(
-                Icons.menu,
+                Icons.arrow_back,
                 color: Colors.white,
               ),
-              onPressed: () => Scaffold.of(context).openDrawer()),
+              onPressed: () => {
+              Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => Erawana()))
+              }),
         ),
         actions: [
         ],

@@ -14,12 +14,12 @@ import 'package:minesmart/screens/deshboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-Future<CompanyProfileModel> getCompanyDetails(BuildContext context) async
+Future<CompanyProfileModel> getCompanyDetails(BuildContext context,String ssoid,String userid) async
 {
   OverlayEntry loader = Helpers.overlayLoader(context);
   Overlay.of(context)!.insert(loader);
   var url;
-  url = Uri.parse(Constants.baseUrl+ Constants.getCompanyDetail+'objssoid='+"mehtasambhav458"+'&objUserId='+"5"+'');
+  url = Uri.parse(Constants.baseUrl+ Constants.getCompanyDetail+'objssoid='+ssoid+'&objUserId='+userid+'');
   final http.Response response = await http.post(
     url,
     headers: <String, String>{

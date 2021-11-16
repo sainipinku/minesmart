@@ -339,7 +339,7 @@ class _DeshBoardState extends State<DeshBoard> {
                       }).toList(),
                     ),
                   ),
-                  height: 55,
+                  height: 65,
                   width: MediaQuery.of(context).size.width,
 
                 ),

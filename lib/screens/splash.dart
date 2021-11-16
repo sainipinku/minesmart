@@ -82,8 +82,7 @@ class _SplashState extends State<Splash> {
                   width: 200,
                   fit: BoxFit.fill,
                 ),
-              )
-              ,
+              ),
             )
         )
     );

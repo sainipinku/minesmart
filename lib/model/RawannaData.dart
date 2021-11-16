@@ -41,6 +41,8 @@ class Data {
   String totalWeight= "";
   String rawannastatus= "";
   String ERawannaNo = "";
+  String MLNo = "";
+  String SSOID = "";
 
   Data(
       this.cRId,
@@ -54,7 +56,7 @@ class Data {
         this.tareWeight,
         this.grossWeight,
         this.totalWeight,
-        this.rawannastatus,this.ERawannaNo);
+        this.rawannastatus,this.ERawannaNo,this.MLNo,this.SSOID);
 
   Data.fromJson(Map<String, dynamic> json) {
     cRId = json['CRId']!= null ? json['CRId'] : 0;
@@ -70,6 +72,8 @@ class Data {
     totalWeight = json['TotalWeight']!= null ? json['TotalWeight'] : '';
     rawannastatus = json['Rawannastatus']!= null ? json['Rawannastatus'] : '';
     ERawannaNo = json['ERawannaNo']!= null ? json['ERawannaNo'] : '';
+    MLNo = json['MLNo']!= null ? json['MLNo'] : '';
+    SSOID = json['SSOID']!= null ? json['SSOID'] : '';
   }
 
   Map<String, dynamic> toJson() {
@@ -87,6 +91,8 @@ class Data {
     data['TotalWeight'] = this.totalWeight;
     data['Rawannastatus'] = this.rawannastatus;
     data['ERawannaNo'] = this.ERawannaNo;
+    data['MLNo'] = this.MLNo;
+    data['SSOID'] = this.SSOID;
     return data;
   }
 }

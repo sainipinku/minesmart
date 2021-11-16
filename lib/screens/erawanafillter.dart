@@ -22,6 +22,8 @@ class ErawanaFillter extends StatefulWidget {
 
 class _ErawanaFillterState extends State<ErawanaFillter> {
   FiltterModel? filtterModel;
+  String sso_id = "";
+  String weight_no = "";
   String conDropdown = "",eRawannaNoDropdown = "",driveNameDropdown= "",vichicleDropdown="",driverMobileDropdown = "";
   int conIndex = 0,erawannaIndex = 0,drivenameIndex = 0,vichicleIndex=0,drivemobileIndex=0;
   List <String> conItems = [] ;
@@ -32,9 +34,15 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
   @override
   void initState() {
     super.initState();
+    SharedPref.getSsoId("sso_id").then((value) => setState(() {
+      sso_id = value;
+    }));
+    SharedPref.getWeighBridgeNo("weigh_bridge_no").then((value) => setState(() {
+      weight_no = value;
+    }));
     Helpers.verifyInternet().then((intenet) {
       if (intenet != null && intenet) {
-        getFiltterData(context).then((response) {
+        getFiltterData(context,sso_id,weight_no).then((response) {
           setState(() {
             filtterModel = response;
             for (var i = 0; i < filtterModel!.data!.table1.length; i++) {
