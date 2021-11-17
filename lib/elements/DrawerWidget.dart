@@ -130,7 +130,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     Navigator.pop(context);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Erawana()),
+                      MaterialPageRoute(builder: (context) => Erawana(false,"","","","","")),
                     );
                   });
                   /* Navigator.push(

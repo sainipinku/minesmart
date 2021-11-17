@@ -12,33 +12,54 @@ import 'package:minesmart/screens/details.dart';
 import 'package:minesmart/screens/erawanafillter.dart';
 
 class Erawana extends StatefulWidget {
-  const Erawana({Key? key}) : super(key: key);
+  bool filtterType = false;
+  String conDropdown = "",eRawannaNoDropdown = "",driveNameDropdown= "",vichicleDropdown="",driverMobileDropdown = "";
+  Erawana(this.filtterType,this.conDropdown,this.driveNameDropdown,this.driverMobileDropdown,this.eRawannaNoDropdown,this.vichicleDropdown) : super();
 
   @override
-  _ErawanaState createState() => _ErawanaState();
+  _ErawanaState createState() => _ErawanaState(filtterType,conDropdown,eRawannaNoDropdown,driveNameDropdown,vichicleDropdown,driverMobileDropdown);
 }
 
 class _ErawanaState extends State<Erawana> {
   RawannaData? rawannaData;
   String sso_id = "";
   String weight_no = "";
+  String user_id = "";
+  bool filtterType = false;
+  String conDropdown = "",eRawannaNoDropdown = "",driveNameDropdown= "",vichicleDropdown="",driverMobileDropdown = "";
+  _ErawanaState(this.filtterType,this.conDropdown,this.driveNameDropdown,this.driverMobileDropdown,this.eRawannaNoDropdown,this.vichicleDropdown);
   @override
   void initState() {
     super.initState();
     SharedPref.getSsoId("sso_id").then((value) => setState(() {
       sso_id = value;
+      print(sso_id);
     }));
     SharedPref.getWeighBridgeNo("weigh_bridge_no").then((value) => setState(() {
       weight_no = value;
+      print(weight_no);
+    }));
+    SharedPref.getUserId("user_id").then((value) => setState(() {
+      user_id = value.toString();
+      print(user_id);
     }));
     Helpers.verifyInternet().then((intenet) {
       if (intenet != null && intenet) {
-        getRawannaData(context,sso_id,weight_no).then((response) {
-          setState(() {
-            rawannaData = response;
-          });
+        if(filtterType==true){
+          getRawannaFillterData(context,sso_id,weight_no,user_id,"",conDropdown,vichicleDropdown,driverMobileDropdown,driveNameDropdown,"",eRawannaNoDropdown).then((response) {
+            setState(() {
+              rawannaData = response;
+            });
 
-        });
+          });
+        }else{
+          getRawannaData(context,sso_id,weight_no).then((response) {
+            setState(() {
+              rawannaData = response;
+            });
+
+          });
+        }
       }
       else {
         showDialog(

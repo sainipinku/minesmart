@@ -67,7 +67,7 @@ class _DetailsState extends State<Details> {
               ),
               onPressed: () => {
               Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => Erawana()))
+              MaterialPageRoute(builder: (context) => Erawana(false,"","","","","")))
               }),
         ),
         actions: [

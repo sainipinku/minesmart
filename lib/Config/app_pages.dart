@@ -23,7 +23,7 @@ class AppPages {
         page: () => DeshBoard()),
     GetPage(
         name: Routes.erawana,
-        page: () => Erawana()),
+        page: () => Erawana(false,"","","","","")),
     GetPage(
         name: Routes.details,
         page: () => Details(0)),

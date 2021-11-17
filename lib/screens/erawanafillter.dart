@@ -12,6 +12,7 @@ import 'package:minesmart/model/FiltterModel.dart';
 import 'package:minesmart/model/RawannaData.dart';
 import 'package:minesmart/repository/filtter_repository.dart';
 import 'package:minesmart/repository/rawanna_repository.dart';
+import 'package:minesmart/screens/erawana.dart';
 
 class ErawanaFillter extends StatefulWidget {
   const ErawanaFillter({Key? key}) : super(key: key);
@@ -24,6 +25,8 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
   FiltterModel? filtterModel;
   String sso_id = "";
   String weight_no = "";
+  String user_id = "";
+  bool filtterType = true;
   String conDropdown = "",eRawannaNoDropdown = "",driveNameDropdown= "",vichicleDropdown="",driverMobileDropdown = "";
   int conIndex = 0,erawannaIndex = 0,drivenameIndex = 0,vichicleIndex=0,drivemobileIndex=0;
   List <String> conItems = [] ;
@@ -39,6 +42,9 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
     }));
     SharedPref.getWeighBridgeNo("weigh_bridge_no").then((value) => setState(() {
       weight_no = value;
+    }));
+    SharedPref.getUserId("user_id").then((value) => setState(() {
+      user_id = value.toString();
     }));
     Helpers.verifyInternet().then((intenet) {
       if (intenet != null && intenet) {
@@ -112,6 +118,8 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
                     Colors.white, // foreground
                   ),
                   onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Erawana(filtterType,conDropdown,eRawannaNoDropdown,driveNameDropdown,vichicleDropdown,driverMobileDropdown)));
                   },
                   child: Text(
                     Strings.applyfilter,

@@ -26,8 +26,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
     SharedPref.getSsoId("sso_id").then((value) => setState(() {
       sso_id = value;
     }));
-    SharedPref.getWeighBridgeNo("user_id").then((value) => setState(() {
-      user_id = value;
+    SharedPref.getUserId("user_id").then((value) => setState(() {
+      user_id = value.toString();
     }));
     Helpers.verifyInternet().then((intenet) {
       if (intenet != null && intenet) {
@@ -322,15 +322,210 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                          ],
                        ),
                      ],
-                   ):Center(
-                       child: Text(
-                         "No Record",
-                         style:  TextStyle(
-                             color: Colors.black,
-                             fontSize: 17,
-                             fontFamily: Fonts.ps_default_font_family,
-                             fontWeight: FontWeight.w600),
-                       )
+                   ):Column(
+                     crossAxisAlignment: CrossAxisAlignment.center,
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       Row(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: [
+                           Text(
+                             Strings.company,
+                             style: const TextStyle(
+                                 color: Colors.black,
+                                 fontSize: 17,
+                                 fontFamily: Fonts.ps_default_font_family,
+                                 fontWeight: FontWeight.w600),
+                           ),
+                           Expanded(
+                               child: Padding(
+                                 padding: EdgeInsets.only(left: 10.0),
+                                 child: Text(
+                                   "",
+                                   maxLines: 2,
+                                   overflow: TextOverflow.ellipsis,
+                                   style: TextStyle(
+                                       color: Colors.black,
+                                       fontSize: 17,
+                                       fontFamily: Fonts.ps_default_font_family,
+                                       fontWeight: FontWeight.w600),
+                                 ),
+                               ))
+                         ],
+                       ),
+                       const SizedBox(
+                         height: 20,
+                       ),
+                       Row(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: [
+                           Text(
+                             Strings.address,
+                             style: const TextStyle(
+                                 color: Colors.black,
+                                 fontSize: 17,
+                                 fontFamily: Fonts.ps_default_font_family,
+                                 fontWeight: FontWeight.w600),
+                           ),
+                           Expanded(
+                               child: Padding(
+                                 padding: EdgeInsets.only(left: 10.0),
+                                 child: Text(
+                                   "",
+                                   maxLines: 2,
+                                   overflow: TextOverflow.ellipsis,
+                                   style: TextStyle(
+                                       color: Colors.black,
+                                       fontSize: 17,
+                                       fontFamily: Fonts.ps_default_font_family,
+                                       fontWeight: FontWeight.w600),
+                                 ),
+                               ))
+                         ],
+                       ),
+                       const SizedBox(
+                         height: 20,
+                       ),
+                       Row(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: [
+                           Text(
+                             Strings.mobileno,
+                             style: const TextStyle(
+                                 color: Colors.black,
+                                 fontSize: 17,
+                                 fontFamily: Fonts.ps_default_font_family,
+                                 fontWeight: FontWeight.w600),
+                           ),
+                           Padding(
+                             padding: EdgeInsets.only(left: 10.0),
+                             child: Text(
+                               "",
+                               style: TextStyle(
+                                   color: Colors.black,
+                                   fontSize: 17,
+                                   fontFamily: Fonts.ps_default_font_family,
+                                   fontWeight: FontWeight.w600),
+                             ),
+                           )
+                         ],
+                       ),
+                       const SizedBox(
+                         height: 20,
+                       ),
+                       Row(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: [
+                           Text(
+                             Strings.emailid,
+                             style: const TextStyle(
+                                 color: Colors.black,
+                                 fontSize: 17,
+                                 fontFamily: Fonts.ps_default_font_family,
+                                 fontWeight: FontWeight.w600),
+                           ),
+                           Padding(
+                             padding: EdgeInsets.only(left: 10.0),
+                             child: Text(
+                               "",
+                               style: TextStyle(
+                                   color: Colors.black,
+                                   fontSize: 17,
+                                   fontFamily: Fonts.ps_default_font_family,
+                                   fontWeight: FontWeight.w600),
+                             ),
+                           )
+                         ],
+                       ),
+                       const SizedBox(
+                         height: 20,
+                       ),
+                       Row(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: [
+                           Text(
+                             Strings.gstno,
+                             style: const TextStyle(
+                                 color: Colors.black,
+                                 fontSize: 17,
+                                 fontFamily: Fonts.ps_default_font_family,
+                                 fontWeight: FontWeight.w600),
+                           ),
+                           Padding(
+                             padding: EdgeInsets.only(left: 10.0),
+                             child: Text(
+                               "",
+                               style: TextStyle(
+                                   color: Colors.black,
+                                   fontSize: 17,
+                                   fontFamily: Fonts.ps_default_font_family,
+                                   fontWeight: FontWeight.w600),
+                             ),
+                           )
+                         ],
+                       ),
+                       const SizedBox(
+                         height: 20,
+                       ),
+                       Row(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: [
+                           Text(
+                             Strings.panno,
+                             style: const TextStyle(
+                                 color: Colors.black,
+                                 fontSize: 17,
+                                 fontFamily: Fonts.ps_default_font_family,
+                                 fontWeight: FontWeight.w600),
+                           ),
+                           Padding(
+                             padding: EdgeInsets.only(left: 10.0),
+                             child: Text(
+                               "",
+                               style: TextStyle(
+                                   color: Colors.black,
+                                   fontSize: 17,
+                                   fontFamily: Fonts.ps_default_font_family,
+                                   fontWeight: FontWeight.w600),
+                             ),
+                           )
+                         ],
+                       ),
+                       const SizedBox(
+                         height: 20,
+                       ),
+                       Row(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: [
+                           Text(
+                             Strings.website,
+                             style: const TextStyle(
+                                 color: Colors.black,
+                                 fontSize: 17,
+                                 fontFamily: Fonts.ps_default_font_family,
+                                 fontWeight: FontWeight.w600),
+                           ),
+                           const Padding(
+                             padding: EdgeInsets.only(left: 10.0),
+                             child: Text(
+                               "",
+                               style: TextStyle(
+                                   color: Colors.black,
+                                   fontSize: 17,
+                                   fontFamily: Fonts.ps_default_font_family,
+                                   fontWeight: FontWeight.w600),
+                             ),
+                           )
+                         ],
+                       ),
+                     ],
                    ),),
               ):const Center(
                   child: Text(

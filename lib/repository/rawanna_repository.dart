@@ -43,3 +43,35 @@ Future<RawannaData> getRawannaData(BuildContext context,String ssoid,String weig
   }
 
 }
+Future<RawannaData> getRawannaFillterData(BuildContext context,String ssoid,String weightno,String userid,String mineralname,String consigneename,String vechicle,String drivemoble,String drivename,String mlno,String erwannano) async
+{
+  OverlayEntry loader = Helpers.overlayLoader(context);
+  Overlay.of(context)!.insert(loader);
+  var url;
+  url = Uri.parse(Constants.baseUrl+ Constants.getFillterSearchDetails+'objAuthoken=987654321&objssoid='+ssoid+'&objUserId='+userid+'&objweightno='+weightno+'&objMineralName='+mineralname+'&objConsigneeName='+consigneename+'&objVechicle='+vechicle+'&objDriverMobile='+drivemoble+'&objDriverName='+drivename+'&objMLNo='+mlno+'&objErawannaNo='+erwannano+'');
+  final http.Response response = await http.post(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    /* body: jsonEncode(<String, String>{
+      'objAuthoken': '987654321',
+      'objUserName': email,
+      'objPassword': password,
+    }
+    ),*/
+
+  );
+  if (response.statusCode == 200) {
+    Helpers.hideLoader(loader);
+    Helpers.createSnackBar(context, json.decode(response.body)['message'].toString());
+    return  RawannaData.fromJson(json.decode(response.body));
+
+  } else {
+    Helpers.hideLoader(loader);
+    Helpers.createSnackBar(context, json.decode(response.body)['message'].toString());
+    throw new Exception(response.body);
+
+  }
+
+}

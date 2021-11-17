@@ -3,5 +3,6 @@ class Constants {
   static final String login = "getLogin?";
   static final String getrawanna = "getrawanna?";
   static final String getFillterMaster = "getFillterMaster?";
+  static final String getFillterSearchDetails = "getFilterSearchDetails?";
   static final String getCompanyDetail = "getCompanyDetail?";
 }
