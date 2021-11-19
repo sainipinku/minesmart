@@ -8,7 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:minesmart/Helper/colors.dart';
 import 'package:minesmart/Helper/fonts.dart';
 
-
+import 'package:intl/intl.dart';
 import 'CircularLoadingWidget.dart';
 
 class Helpers {
@@ -92,19 +92,50 @@ class Helpers {
     }
     return false;
   }
-  static String discount(int price, int saleprice) {
+  static String date(String datetime) {
     try {
 
-      // var intprice = int.parse(price);
-      //  var intsaleprice = int.parse(saleprice);
-      double par = ((price - saleprice)/price)*100;
-      double i = double.parse((par).toStringAsFixed(2));
-      return '$i';
+      DateFormat dateFormat = DateFormat("yyyy-MM-ddTHH:mm:ss");
+      DateTime dateTime = dateFormat.parse(datetime);
+      String date_format = DateFormat("dd-MM-yyyy").format(dateTime);
+      return date_format;
     } catch (e) {
       return '';
     }
   }
+  static String time(String datetime) {
+    try {
 
+      DateFormat dateFormat = DateFormat("yyyy-MM-ddTHH:mm:ss");
+      DateTime dateTime = dateFormat.parse(datetime);
+      String date_format = DateFormat("hh:mm a").format(dateTime);
+      return date_format;
+    } catch (e) {
+      return '';
+    }
+  }
+  static String rawanadate(String datetime) {
+    try {
+
+      DateFormat dateFormat = DateFormat("MM/dd/yy  HH:mm:ss a");
+      DateTime dateTime = dateFormat.parse(datetime);
+      String date_format = DateFormat("dd-MM-yy").format(dateTime);
+      return date_format;
+    } catch (e) {
+      return '';
+    }
+  }
+  static String rawanatime(String datetime) {
+    try {
+
+      DateFormat dateFormat = DateFormat("MM/dd/yy  HH:mm:ss a");
+      DateTime dateTime = dateFormat.parse(datetime);
+      String date_format = DateFormat("hh:mm a").format(dateTime);
+      return date_format;
+    } catch (e) {
+      return '';
+    }
+  }
   static createSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       duration: const Duration(seconds: 1),

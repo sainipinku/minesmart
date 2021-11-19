@@ -43,12 +43,13 @@ Future<RawannaData> getRawannaData(BuildContext context,String ssoid,String weig
   }
 
 }
-Future<RawannaData> getRawannaFillterData(BuildContext context,String ssoid,String weightno,String userid,String mineralname,String consigneename,String vechicle,String drivemoble,String drivename,String mlno,String erwannano) async
+Future<RawannaData> getRawannaFillterData(BuildContext context,String ssoid,String weightno,String userid,String mineralname,String consigneename,String vechicle,String drivemoble,String drivename,String mlno,String erwannano,String formdate,String todate) async
 {
   OverlayEntry loader = Helpers.overlayLoader(context);
   Overlay.of(context)!.insert(loader);
   var url;
-  url = Uri.parse(Constants.baseUrl+ Constants.getFillterSearchDetails+'objAuthoken=987654321&objssoid='+ssoid+'&objUserId='+userid+'&objweightno='+weightno+'&objMineralName='+mineralname+'&objConsigneeName='+consigneename+'&objVechicle='+vechicle+'&objDriverMobile='+drivemoble+'&objDriverName='+drivename+'&objMLNo='+mlno+'&objErawannaNo='+erwannano+'');
+  url = Uri.parse(Constants.baseUrl+ Constants.getFillterSearchDetails+'objUserId='+userid+'&objssoid='+ssoid+'&objAuthoken=987654321&objMineralName='+mineralname+'&objConsigneeName='+consigneename+'&objVechicle='+vechicle+'&objDriverMobile='+drivemoble+'&objDriverName='+drivename+'&objMLNo='+mlno+'&objErawannaNo='+erwannano+'&objweightno='+weightno+'&objFromdate='+formdate+'&objTodate='+todate+'');
+  //url = Uri.parse(Constants.baseUrl+ Constants.getFillterSearchDetails+'objUserId="5"&objssoid=somendrac90&objAuthoken=987654321&objMineralName=""&objConsigneeName=""&objVechicle=""&objDriverMobile=""&objDriverName=Amit kumar&objMLNo=""&objErawannaNo=""&objweightno=00844');
   final http.Response response = await http.post(
     url,
     headers: <String, String>{

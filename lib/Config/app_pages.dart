@@ -2,7 +2,7 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:minesmart/Config/app_route.dart';
 import 'package:minesmart/screens/deshboard.dart';
-import 'package:minesmart/screens/details.dart';
+import 'package:minesmart/screens/erawanadetails.dart';
 import 'package:minesmart/screens/erawana.dart';
 import 'package:minesmart/screens/erawanafillter.dart';
 import 'package:minesmart/screens/login.dart';
@@ -23,10 +23,10 @@ class AppPages {
         page: () => DeshBoard()),
     GetPage(
         name: Routes.erawana,
-        page: () => Erawana(false,"","","","","")),
+        page: () => Erawana(false,"","","","","","","")),
     GetPage(
-        name: Routes.details,
-        page: () => Details(0)),
+        name: Routes.erawanadetails,
+        page: () => ErawanaDetails(0)),
     GetPage(
         name: Routes.profileupdate,
         page: () => ProfileUpdate()),

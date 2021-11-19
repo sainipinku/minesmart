@@ -5,7 +5,7 @@ abstract class Routes {
   static const login = '/Login';
   static const deshboard = '/DeshBoard';
   static const erawana = '/Erawana';
-  static const details = '/Details';
+  static const erawanadetails = '/ErawanaDetails';
   static const profileupdate = '/ProfileUpdate';
   static const erawanafillter = '/ErawanaFillter';
 

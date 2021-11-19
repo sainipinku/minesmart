@@ -11,6 +11,7 @@ import 'package:minesmart/screens/deshboard.dart';
 import 'package:minesmart/screens/erawana.dart';
 import 'package:minesmart/screens/login.dart';
 import 'package:minesmart/screens/profileupdate.dart';
+import 'package:minesmart/screens/tpass.dart';
 
 class DrawerWidget extends StatefulWidget {
 
@@ -130,7 +131,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     Navigator.pop(context);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Erawana(false,"","","","","")),
+                      MaterialPageRoute(builder: (context) => Erawana(false,"","","","","","","")),
                     );
                   });
                   /* Navigator.push(
@@ -149,15 +150,11 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   setState(() {
 
                     Navigator.pop(context);
-                   /* Navigator.push(
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => dealsPage()),
-                    );*/
+                      MaterialPageRoute(builder: (context) => TPass(false,"","","","","")),
+                    );
                   });
-                  /* Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyProduct()),
-              );*/
                 },
               ),
             ),
@@ -168,10 +165,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 onTap: () {
                   setState(() {
                     Navigator.pop(context);
-                   /* Navigator.push(
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Cart()),
-                    );*/
+                      MaterialPageRoute(builder: (context) => TPass(false,"","","","","")),
+                    );
                   });
                   /* Navigator.push(
                 context,

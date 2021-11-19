@@ -8,6 +8,7 @@ import 'package:minesmart/Helper/strings.dart';
 import 'package:minesmart/elements/DrawerWidget.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 class DeshBoard extends StatefulWidget {
   const DeshBoard({Key? key}) : super(key: key);
 
@@ -77,7 +78,9 @@ class _DeshBoardState extends State<DeshBoard> {
         curve: Curves.easeIn,
       );
     });
+
   }
+
 
   @override
   void dispose() {

@@ -43,6 +43,12 @@ class Data {
   String ERawannaNo = "";
   String MLNo = "";
   String SSOID = "";
+  String ConsigneeGSTNo = "";
+  String ConsigneeAddress = "";
+  String TransportDetails = "";
+  String Royaltyamount = "";
+  String RawannaCount = "";
+  String RawannaDate = "";
 
   Data(
       this.cRId,
@@ -56,7 +62,9 @@ class Data {
         this.tareWeight,
         this.grossWeight,
         this.totalWeight,
-        this.rawannastatus,this.ERawannaNo,this.MLNo,this.SSOID);
+        this.rawannastatus,this.ERawannaNo,this.MLNo,this.SSOID,
+       this.ConsigneeGSTNo,this.ConsigneeAddress,
+       this.TransportDetails,this.Royaltyamount,this.RawannaCount,this.RawannaDate);
 
   Data.fromJson(Map<String, dynamic> json) {
     cRId = json['CRId']!= null ? json['CRId'] : 0;
@@ -74,6 +82,12 @@ class Data {
     ERawannaNo = json['ERawannaNo']!= null ? json['ERawannaNo'] : '';
     MLNo = json['MLNo']!= null ? json['MLNo'] : '';
     SSOID = json['SSOID']!= null ? json['SSOID'] : '';
+    ConsigneeGSTNo = json['ConsigneeGSTNo']!= null ? json['ConsigneeGSTNo'] : '';
+    ConsigneeAddress = json['ConsigneeAddress']!= null ? json['ConsigneeAddress'] : '';
+    TransportDetails = json['TransportDetails']!= null ? json['TransportDetails'] : '';
+    Royaltyamount = json['Royaltyamount']!= null ? json['Royaltyamount'] : '';
+    RawannaCount = json['RawannaCount']!= null ? json['RawannaCount'] : '';
+    RawannaDate = json['RawannaDate']!= null ? json['RawannaDate'] : '';
   }
 
   Map<String, dynamic> toJson() {
@@ -93,6 +107,12 @@ class Data {
     data['ERawannaNo'] = this.ERawannaNo;
     data['MLNo'] = this.MLNo;
     data['SSOID'] = this.SSOID;
+    data['ConsigneeGSTNo'] = this.ConsigneeGSTNo;
+    data['ConsigneeAddress'] = this.ConsigneeAddress;
+    data['TransportDetails'] = this.TransportDetails;
+    data['Royaltyamount'] = this.Royaltyamount;
+    data['RawannaCount'] = this.RawannaCount;
+    data['RawannaDate'] = this.RawannaDate;
     return data;
   }
 }

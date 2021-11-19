@@ -13,7 +13,7 @@ import 'package:minesmart/model/RawannaData.dart';
 import 'package:minesmart/repository/filtter_repository.dart';
 import 'package:minesmart/repository/rawanna_repository.dart';
 import 'package:minesmart/screens/erawana.dart';
-
+import 'package:intl/intl.dart';
 class ErawanaFillter extends StatefulWidget {
   const ErawanaFillter({Key? key}) : super(key: key);
 
@@ -80,6 +80,34 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
       }
     });
   }
+  DateTime currentFromDate = DateTime.now();
+  DateTime currentToDate = DateTime.now();
+  String fromDate = "";
+  String toDate = "";
+  Future<void> _selectFromDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: currentFromDate,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2050));
+    if (pickedDate != null && pickedDate != currentFromDate)
+      setState(() {
+        currentFromDate = pickedDate;
+        fromDate = DateFormat("yyyy-MM-dd").format(currentFromDate);
+      });
+  }
+  Future<void> _selectToDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: currentToDate,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2050));
+    if (pickedDate != null && pickedDate != currentToDate)
+      setState(() {
+        currentToDate = pickedDate;
+        toDate = DateFormat("yyyy-MM-dd").format(currentToDate);
+      });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,7 +147,7 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
                   ),
                   onPressed: () {
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Erawana(filtterType,conDropdown,eRawannaNoDropdown,driveNameDropdown,vichicleDropdown,driverMobileDropdown)));
+                        MaterialPageRoute(builder: (context) => Erawana(filtterType,conDropdown,driveNameDropdown,driverMobileDropdown,eRawannaNoDropdown,vichicleDropdown,fromDate,toDate)));
                   },
                   child: Text(
                     Strings.applyfilter,
@@ -456,6 +484,70 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
                 height: 55,
                 width: MediaQuery.of(context).size.width,
 
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 10.0,right: 10.0,top: 20.0),
+                padding: EdgeInsets.only(left: 10.0,right: 10.0),
+                height: 55,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: CentralizeColor.colorlogodark,
+                    borderRadius: BorderRadius.all(Radius.circular(5))
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      fromDate == "" ?"From Date":fromDate.toString(),
+                      style: const TextStyle(
+                        color: CentralizeColor.colorWhite,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        fontFamily:Fonts.ps_default_font_family,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.calendar_today,color: Colors.white,),
+                      onPressed: () {
+                        _selectFromDate(context);
+                      },
+
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 10.0,right: 10.0,top: 20.0),
+                padding: EdgeInsets.only(left: 10.0,right: 10.0),
+                height: 55,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: CentralizeColor.colorlogodark,
+                    borderRadius: BorderRadius.all(Radius.circular(5))
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                     toDate == "" ? "To Date":toDate.toString(),
+                      style: const TextStyle(
+                        color: CentralizeColor.colorWhite,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        fontFamily:Fonts.ps_default_font_family,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.calendar_today,color: Colors.white,),
+                      onPressed: () {
+                        _selectToDate(context);
+                      },
+
+                    )
+                  ],
+                ),
               ),
             ],
           ): const Center(

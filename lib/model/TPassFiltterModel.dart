@@ -1,11 +1,11 @@
-class FiltterModel {
+class TPassFiltterModel {
   String success = "";
   String message = "";
   Data? data;
 
-  FiltterModel(this.success, this.message, this.data);
+  TPassFiltterModel(this.success, this.message, this.data);
 
-  FiltterModel.fromJson(Map<String, dynamic> json) {
+  TPassFiltterModel.fromJson(Map<String, dynamic> json) {
     success = json['success']!= null ? json['success'] : '';
     message = json['message']!= null ? json['message'] : '';
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
@@ -24,13 +24,13 @@ class FiltterModel {
 
 class Data {
   List<Table> table = [];
-  List<Table1> table1= [];
-  List<Table2> table2= [];
-  List<Table3> table3= [];
-  List<Table4> table4= [];
-  List<Table5> table5= [];
-  List<Table6> table6= [];
-  List<Table7> table7= [];
+  List<Table1> table1 = [];
+  List<Table2> table2 = [];
+  List<Table3> table3 = [];
+  List<Table4> table4 = [];
+  List<Table5> table5 = [];
+  List<Table6> table6 = [];
+  List<Table7> table7 = [];
 
   Data(
       this.table,
@@ -40,7 +40,7 @@ class Data {
         this.table4,
         this.table5,
         this.table6,
-      this.table7);
+        this.table7);
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['Table'] != null) {
@@ -124,27 +124,43 @@ class Data {
 }
 
 class Table {
-  String mINERALNAME = "";
+  String dEALERNAME = "";
 
-  Table(this.mINERALNAME);
+  Table(this.dEALERNAME);
 
   Table.fromJson(Map<String, dynamic> json) {
-    mINERALNAME = json['MINERALNAME']!= null ? json['MINERALNAME'] : '';
+    dEALERNAME = json['DEALERNAME']!= null ? json['DEALERNAME'] : '';
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['MINERALNAME'] = this.mINERALNAME;
+    data['DEALERNAME'] = this.dEALERNAME;
     return data;
   }
 }
 
 class Table1 {
-  String cONSIGNEENAME = "";
+  String mINERALFORMATIOR = "";
 
-  Table1(this.cONSIGNEENAME);
+  Table1(this.mINERALFORMATIOR);
 
   Table1.fromJson(Map<String, dynamic> json) {
+    mINERALFORMATIOR = json['MINERALFORMATIOR']!= null ? json['MINERALFORMATIOR'] : '';
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['MINERALFORMATIOR'] = this.mINERALFORMATIOR;
+    return data;
+  }
+}
+
+class Table2 {
+  String cONSIGNEENAME = "";
+
+  Table2(this.cONSIGNEENAME);
+
+  Table2.fromJson(Map<String, dynamic> json) {
     cONSIGNEENAME = json['CONSIGNEENAME']!= null ? json['CONSIGNEENAME'] : '';
   }
 
@@ -155,12 +171,12 @@ class Table1 {
   }
 }
 
-class Table2 {
-  String vECHICLEREGISTRATION ="";
+class Table3 {
+  String vECHICLEREGISTRATION = "";
 
-  Table2(this.vECHICLEREGISTRATION);
+  Table3(this.vECHICLEREGISTRATION);
 
-  Table2.fromJson(Map<String, dynamic> json) {
+  Table3.fromJson(Map<String, dynamic> json) {
     vECHICLEREGISTRATION = json['VECHICLEREGISTRATION']!= null ? json['VECHICLEREGISTRATION'] : '';
   }
 
@@ -171,12 +187,12 @@ class Table2 {
   }
 }
 
-class Table3 {
-  String dRIVERMOBILENO ="";
+class Table4 {
+  String dRIVERMOBILENO = "";
 
-  Table3(this.dRIVERMOBILENO);
+  Table4(this.dRIVERMOBILENO);
 
-  Table3.fromJson(Map<String, dynamic> json) {
+  Table4.fromJson(Map<String, dynamic> json) {
     dRIVERMOBILENO = json['DRIVERMOBILENO']!= null ? json['DRIVERMOBILENO'] : '';
   }
 
@@ -187,12 +203,12 @@ class Table3 {
   }
 }
 
-class Table4 {
-  String dRIVERNAME="";
+class Table5 {
+  String dRIVERNAME ="";
 
-  Table4(this.dRIVERNAME);
+  Table5(this.dRIVERNAME);
 
-  Table4.fromJson(Map<String, dynamic> json) {
+  Table5.fromJson(Map<String, dynamic> json) {
     dRIVERNAME = json['DRIVERNAME']!= null ? json['DRIVERNAME'] : '';
   }
 
@@ -203,49 +219,34 @@ class Table4 {
   }
 }
 
-class Table5 {
-  String eRAWANNANO="";
-
-  Table5(this.eRAWANNANO);
-
-  Table5.fromJson(Map<String, dynamic> json) {
-    eRAWANNANO = json['ERAWANNANO']!= null ? json['ERAWANNANO'] : '';
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ERAWANNANO'] = this.eRAWANNANO;
-    return data;
-  }
-}
-
 class Table6 {
-  String MLNo ="";
+  String tRANSITPASSNUMBER ="";
 
-  Table6(this.MLNo);
+  Table6(this.tRANSITPASSNUMBER);
 
   Table6.fromJson(Map<String, dynamic> json) {
-    MLNo = json['MLNo']!= null ? json['MLNo'] : '';
+    tRANSITPASSNUMBER = json['TRANSITPASSNUMBER']!= null ? json['TRANSITPASSNUMBER'] : '';
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['MLNo'] = this.MLNo;
+    data['TRANSITPASSNUMBER'] = this.tRANSITPASSNUMBER;
     return data;
   }
 }
-class Table7 {
-  String rAWANNASTATUS ="";
 
-  Table7(this.rAWANNASTATUS);
+class Table7 {
+  String tPASSSTATUS ="";
+
+  Table7(this.tPASSSTATUS);
 
   Table7.fromJson(Map<String, dynamic> json) {
-    rAWANNASTATUS = json['RAWANNASTATUS']!= null ? json['RAWANNASTATUS'] : '';
+    tPASSSTATUS = json['TPASSSTATUS']!= null ? json['TPASSSTATUS'] : '';
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['RAWANNASTATUS'] = this.rAWANNASTATUS;
+    data['TPASSSTATUS'] = this.tPASSSTATUS;
     return data;
   }
 }

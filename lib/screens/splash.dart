@@ -31,6 +31,7 @@ class _SplashState extends State<Splash> {
            new MaterialPageRoute(builder: (context) => new Login()));
      }
      else{
+
     Navigator.of(context).pushReplacement(
         new MaterialPageRoute(builder: (context) => new DeshBoard()));
      }
