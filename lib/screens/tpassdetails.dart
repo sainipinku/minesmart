@@ -69,7 +69,7 @@ class _TPassDetailsState extends State<TPassDetails> {
               ),
               onPressed: () => {
               Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => TPass(false,"","","","","")))
+              MaterialPageRoute(builder: (context) => TPass(false,"","","","","","","")))
               }),
         ),
         actions: [

@@ -19,6 +19,7 @@ Future<UserData> createLogin(
   String Url = Constants.baseUrl+ Constants.login;
   var url;
     url = Uri.parse(Constants.baseUrl+ Constants.login+'objAuthoken=987654321&objUserName='+email+'&objPassword='+password+'');
+    print("url"+url.toString());
   final http.Response response = await http.post(
     url,
     headers: <String, String>{
@@ -31,6 +32,7 @@ Future<UserData> createLogin(
     }
     ),*/
   );
+  print("url1");
 /*  var queryParameters = {
     'objAuthoken': '987654321',
     'objUserName': email,

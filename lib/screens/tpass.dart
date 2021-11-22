@@ -13,17 +13,20 @@ import 'package:minesmart/repository/tpass_repository.dart';
 import 'package:minesmart/screens/erawanadetails.dart';
 import 'package:minesmart/screens/erawanafillter.dart';
 import 'package:minesmart/screens/tpassdetails.dart';
+import 'package:minesmart/screens/tpassfiltter.dart';
 
 class TPass extends StatefulWidget {
   bool filtterType = false;
   String conDropdown = "",
-      eRawannaNoDropdown = "",
+      tPassNumberDropdown = "",
       driveNameDropdown = "",
       vichicleDropdown = "",
-      driverMobileDropdown = "";
+      driverMobileDropdown = "",
+      fromdate = "",
+      todate = "";
 
   TPass(this.filtterType, this.conDropdown, this.driveNameDropdown,
-      this.driverMobileDropdown, this.eRawannaNoDropdown, this.vichicleDropdown)
+      this.driverMobileDropdown, this.tPassNumberDropdown, this.vichicleDropdown,this.fromdate,this.todate)
       : super();
 
   @override
@@ -32,8 +35,8 @@ class TPass extends StatefulWidget {
       conDropdown,
       driveNameDropdown,
       driverMobileDropdown,
-      eRawannaNoDropdown,
-      vichicleDropdown);
+      tPassNumberDropdown,
+      vichicleDropdown,fromdate,todate);
 }
 
 class _TPassState extends State<TPass> {
@@ -43,18 +46,22 @@ class _TPassState extends State<TPass> {
   String user_id = "";
   bool filtterType = false;
   String conDropdown = "",
-      eRawannaNoDropdown = "",
+      tPassNumberDropdown = "",
       driveNameDropdown = "",
       vichicleDropdown = "",
-      driverMobileDropdown = "";
+      driverMobileDropdown = "",
+      fromdate = "",
+      todate = "";
 
   _TPassState(
       this.filtterType,
       this.conDropdown,
       this.driveNameDropdown,
       this.driverMobileDropdown,
-      this.eRawannaNoDropdown,
-      this.vichicleDropdown);
+      this.tPassNumberDropdown,
+      this.vichicleDropdown,
+      this.fromdate,
+      this.todate);
 
   @override
   void initState() {
@@ -73,11 +80,34 @@ class _TPassState extends State<TPass> {
     }));
     Helpers.verifyInternet().then((intenet) {
       if (intenet != null && intenet) {
-        getTPassData(context, sso_id, weight_no).then((response) {
-          setState(() {
-            tPassModel = response;
+        if (filtterType == true) {
+          getTPassFillterData(
+              context,
+              sso_id,
+              weight_no,
+              user_id,
+              "",
+              conDropdown,
+              vichicleDropdown,
+              driverMobileDropdown,
+              driveNameDropdown,
+              "",
+              tPassNumberDropdown,
+              fromdate,
+              todate)
+              .then((response) {
+            setState(() {
+              tPassModel = response;
+            });
           });
-        });
+        } else {
+          getTPassData(context, sso_id, weight_no).then((response) {
+            setState(() {
+              tPassModel = response;
+            });
+          });
+        }
+
       } else {
         showDialog(
           barrierDismissible: true,
@@ -120,7 +150,7 @@ class _TPassState extends State<TPass> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ErawanaFillter()));
+                          builder: (context) => TpassFiltter()));
                     },
                     child: Row(
                       children: [

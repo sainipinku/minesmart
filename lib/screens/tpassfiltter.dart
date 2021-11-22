@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:minesmart/Common/Helpers.dart';
 import 'package:minesmart/Common/SharedPref.dart';
@@ -8,29 +6,27 @@ import 'package:minesmart/Helper/fonts.dart';
 import 'package:minesmart/Helper/strings.dart';
 import 'package:minesmart/elements/DrawerWidget.dart';
 import 'package:minesmart/elements/NoInternetdilogbox.dart';
-import 'package:minesmart/model/FiltterModel.dart';
-import 'package:minesmart/model/RawannaData.dart';
-import 'package:minesmart/repository/filtter_repository.dart';
-import 'package:minesmart/repository/rawanna_repository.dart';
-import 'package:minesmart/screens/erawana.dart';
+import 'package:minesmart/model/TPassFiltterModel.dart';
 import 'package:intl/intl.dart';
-class ErawanaFillter extends StatefulWidget {
-  const ErawanaFillter({Key? key}) : super(key: key);
+import 'package:minesmart/repository/filtter_repository.dart';
+import 'package:minesmart/screens/tpass.dart';
+class TpassFiltter extends StatefulWidget {
+  const TpassFiltter({Key? key}) : super(key: key);
 
   @override
-  _ErawanaFillterState createState() => _ErawanaFillterState();
+  _TpassFiltterState createState() => _TpassFiltterState();
 }
 
-class _ErawanaFillterState extends State<ErawanaFillter> {
-  FiltterModel? filtterModel;
+class _TpassFiltterState extends State<TpassFiltter> {
+  TPassFiltterModel? tPassFiltterModel;
   String sso_id = "";
   String weight_no = "";
   String user_id = "";
   bool filtterType = true;
-  String conDropdown = "",eRawannaNoDropdown = "",driveNameDropdown= "",vichicleDropdown="",driverMobileDropdown = "";
-  int conIndex = 0,erawannaIndex = 0,drivenameIndex = 0,vichicleIndex=0,drivemobileIndex=0;
+  String conDropdown = "",tPassNumberDropdown = "",driveNameDropdown= "",vichicleDropdown="",driverMobileDropdown = "";
+  int conIndex = 0,tpassnumberIndex = 0,drivenameIndex = 0,vichicleIndex=0,drivemobileIndex=0;
   List <String> conItems = [] ;
-  List <String> erawannaItems = [] ;
+  List <String> tpassItems = [] ;
   List <String> drivenameItems = [] ;
   List <String> vichicleItems = [] ;
   List <String> drivemobileItems = [] ;
@@ -48,36 +44,37 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
     }));
     Helpers.verifyInternet().then((intenet) {
       if (intenet != null && intenet) {
-        getFiltterData(context,sso_id,weight_no).then((response) {
+        getTpassFiltterData(context,sso_id,weight_no).then((response) {
           setState(() {
-            filtterModel = response;
-            for (var i = 0; i < filtterModel!.data!.table1.length; i++) {
-              if(filtterModel!.data!.table1[i].cONSIGNEENAME != ""){
-                conItems.add(filtterModel!.data!.table1[i].cONSIGNEENAME);
+            tPassFiltterModel = response;
+            for (var i = 0; i < tPassFiltterModel!.data!.table2.length; i++) {
+              if(tPassFiltterModel!.data!.table2[i].cONSIGNEENAME != ""){
+                conItems.add(tPassFiltterModel!.data!.table2[i].cONSIGNEENAME);
               }
 
             }
-            for (var i = 0; i < filtterModel!.data!.table3.length; i++) {
-              if(filtterModel!.data!.table3[i].dRIVERMOBILENO != ""){
-                drivemobileItems.add(filtterModel!.data!.table3[i].dRIVERMOBILENO);
+            for (var i = 0; i < tPassFiltterModel!.data!.table4.length; i++) {
+              if(tPassFiltterModel!.data!.table4[i].dRIVERMOBILENO != ""){
+                drivemobileItems.add(tPassFiltterModel!.data!.table4[i].dRIVERMOBILENO);
               }
 
             }
-            for (var i = 0; i < filtterModel!.data!.table4.length; i++) {
-              if(filtterModel!.data!.table4[i].dRIVERNAME != ""){
-                drivenameItems.add(filtterModel!.data!.table4[i].dRIVERNAME);
+            for (var i = 0; i < tPassFiltterModel!.data!.table5.length; i++) {
+              if(tPassFiltterModel!.data!.table5[i].dRIVERNAME != ""){
+                drivenameItems.add(tPassFiltterModel!.data!.table5[i].dRIVERNAME);
               }
 
             }
-            for (var i = 0; i < filtterModel!.data!.table5.length; i++) {
-              if(filtterModel!.data!.table5[i].eRAWANNANO != ""){
-                erawannaItems.add(filtterModel!.data!.table5[i].eRAWANNANO);
+            for (var i = 0; i < tPassFiltterModel!.data!.table6.length; i++) {
+              if (tPassFiltterModel!.data!.table6[i].tRANSITPASSNUMBER != "") {
+                tpassItems.add(tPassFiltterModel!.data!.table6[i].tRANSITPASSNUMBER);
               }
 
+
             }
-            for (var i = 0; i < filtterModel!.data!.table2.length; i++) {
-              if(filtterModel!.data!.table2[i].vECHICLEREGISTRATION != ""){
-                vichicleItems.add(filtterModel!.data!.table2[i].vECHICLEREGISTRATION);
+            for (var i = 0; i < tPassFiltterModel!.data!.table3.length; i++) {
+              if(tPassFiltterModel!.data!.table3[i].vECHICLEREGISTRATION != ""){
+                vichicleItems.add(tPassFiltterModel!.data!.table3[i].vECHICLEREGISTRATION);
               }
 
             }
@@ -146,7 +143,7 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
       drawer: const DrawerWidget(),
       body: SafeArea(
         child: Container(
-          child: filtterModel !=null ?  Column(
+          child: tPassFiltterModel !=null ?  Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -162,7 +159,7 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
                   ),
                   onPressed: () {
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Erawana(filtterType,conDropdown,driveNameDropdown,driverMobileDropdown,eRawannaNoDropdown,vichicleDropdown,fromDate,toDate)));
+                        MaterialPageRoute(builder: (context) => TPass(filtterType,conDropdown,driveNameDropdown,driverMobileDropdown,tPassNumberDropdown,vichicleDropdown,fromDate,toDate)));
                   },
                   child: Text(
                     Strings.applyfilter,
@@ -186,7 +183,7 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
                   DropdownButtonFormField<String>(
                     iconEnabledColor: Colors.white,
                     iconDisabledColor: Colors.white,
-                    onSaved: (input) => eRawannaNoDropdown = input!,
+                    onSaved: (input) => tPassNumberDropdown = input!,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: CentralizeColor.colorlogodark,
@@ -207,7 +204,7 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
                     ),
 
                     hint: const Text(
-                      "Select Erawanna No",
+                      "Select Transit Pass Number",
                       style:  TextStyle(
                           fontSize: 15,
                           fontFamily: Fonts.ps_default_font_family,
@@ -219,11 +216,11 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
                     isExpanded: true,
                     onChanged: (String? data) {
                       setState(() {
-                        eRawannaNoDropdown = data!;
-                        erawannaIndex = erawannaItems.indexOf(data);
+                        tPassNumberDropdown = data!;
+                        tpassnumberIndex = tpassItems.indexOf(data);
                       });
                     },
-                    items: erawannaItems.map<DropdownMenuItem<String>>((String value) {
+                    items: tpassItems.map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value,
@@ -280,7 +277,7 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
                       ),
 
                     ),
-                   // value:conItems.length== 0 ?null : conItems[conIndex],
+                    // value:conItems.length== 0 ?null : conItems[conIndex],
                     isExpanded: true,
                     onChanged: (String? data) {
                       setState(() {
@@ -546,7 +543,7 @@ class _ErawanaFillterState extends State<ErawanaFillter> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                     toDate == "" ? "To Date":toDate.toString(),
+                      toDate == "" ? "To Date":toDate.toString(),
                       style: const TextStyle(
                         color: CentralizeColor.colorWhite,
                         fontSize: 15,
