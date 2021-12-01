@@ -6,6 +6,8 @@ import 'package:minesmart/Helper/colors.dart';
 import 'package:minesmart/screens/deshboard.dart';
 import 'package:minesmart/screens/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'backgroundvideo.dart';
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
 

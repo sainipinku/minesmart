@@ -51,7 +51,8 @@ Future<TPassModel> getTPassFillterData(BuildContext context,String ssoid,String 
   OverlayEntry loader = Helpers.overlayLoader(context);
   Overlay.of(context)!.insert(loader);
   var url;
-  url = Uri.parse(Constants.baseUrl+ Constants.getFillterSearchDetails+'objUserId='+userid+'&objssoid=AMITKUMARMEHRA&objAuthoken=987654321&objMineralName='+mineralname+'&objConsigneeName='+consigneename+'&objVechicle='+vechicle+'&objDriverMobile='+drivemoble+'&objDriverName='+drivename+'&objMLNo='+mlno+'&objErawannaNo='+erwannano+'&objweightno='+weightno+'&objFromdate='+formdate+'&objTodate='+todate+'');
+  url = Uri.parse(Constants.baseUrl+ Constants.getTranistPassSearchDetails+'objUserId='+userid+'&objssoid=AMITKUMARMEHRA&objAuthoken=987654321&objMineralName='+mineralname+'&objConsigneeName='+consigneename+'&objVechicle='+vechicle+'&objDriverMobile='+drivemoble+'&objDriverName='+drivename+'&objdealerName='+mlno+'&objErawannaNo='+erwannano+'&objweightno='+weightno+'&objFromdate='+formdate+'&objTodate='+todate+'');
+  print("url $url");
   //url = Uri.parse(Constants.baseUrl+ Constants.getFillterSearchDetails+'objUserId="5"&objssoid=somendrac90&objAuthoken=987654321&objMineralName=""&objConsigneeName=""&objVechicle=""&objDriverMobile=""&objDriverName=Amit kumar&objMLNo=""&objErawannaNo=""&objweightno=00844');
   final http.Response response = await http.post(
     url,

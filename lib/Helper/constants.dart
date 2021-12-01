@@ -6,5 +6,6 @@ class Constants {
   static final String getFillterMaster = "getFillterMaster?";
   static final String getTpassFillterMaster = "gettranistpassFillterMaster?";
   static final String getFillterSearchDetails = "getFilterSearchDetails?";
+  static final String getTranistPassSearchDetails = "gettranistpassSearchDetails?";
   static final String getCompanyDetail = "getCompanyDetail?";
 }
